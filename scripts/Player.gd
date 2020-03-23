@@ -4,6 +4,7 @@ export var rot_speed = 2.6
 export var thrust = 500
 export var max_velocity = 400 
 export var friction = 0.65
+export (PackedScene) var bullet
 
 var screen_size
 var rot = 0
@@ -17,6 +18,9 @@ func _ready():
 	position = pos
 
 func _process(delta):
+	if Input.is_action_pressed("player_shoot"):
+		shoot()
+		
 	if Input.is_action_pressed("player_left"):
 		rot -= rot_speed * delta
 	if Input.is_action_pressed("player_right"):
@@ -39,6 +43,12 @@ func _process(delta):
 	if pos.y < 0:
 		pos.y = screen_size.y
 	
+func shoot():
+	if($FireRate.is_stopped()):
+		$FireRate.start()
+		var b = bullet.instance()
+		$BulletContainer.add_child(b)
+		b.start_at(rotation, $BulletSpawnPoint.global_position)
 	
 	position = pos
 	rotation = rot + PI / 2
