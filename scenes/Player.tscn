@@ -30,5 +30,5 @@ shape = SubResource( 1 )
 position = Vector2( 0, -40 )
 
 [node name="FireRate" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
