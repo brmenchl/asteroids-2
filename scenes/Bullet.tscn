@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tempAssets/sheet.laserRed16.atlastex" type="Texture" id=1]
-[ext_resource path="res://scripts/PlayerBullet.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.53787
 height = 41.8368
 
-[node name="PlayerBullet" type="Area2D"]
+[node name="Bullet" type="Area2D"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
