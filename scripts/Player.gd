@@ -9,6 +9,7 @@ export (PackedScene) var bullet
 var screen_size
 var rot = 0
 var vel = Vector2()
+var health = 100
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -37,7 +38,7 @@ func get_acceleration(isThrusting):
 		applied_thrust = thrust;
 	else:
 		applied_thrust = 0;
-		
+	
 	return Vector2(applied_thrust, 0).rotated(rotation - PI / 2) - friction_force
 
 func wrap_screen_edges(pos):
@@ -58,4 +59,13 @@ func shoot():
 		var b = bullet.instance()
 		$BulletContainer.add_child(b)
 		b.start_at(rotation, $BulletSpawnPoint.global_position)
-	
+
+func _on_Player_area_entered(area):
+	if area.get_groups().has('bullet'):
+		apply_damage(area.damage)
+		area.queue_free()
+
+func apply_damage(damage):
+	health = clamp(health - damage, 0, 100)
+	if health == 0:
+		queue_free()
