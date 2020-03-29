@@ -1,7 +1,7 @@
 extends Node
 
-
 export (PackedScene) var asteroid
+signal bullet_hit_asteroid(hit_position)
 
 func _ready():
 	pass # Replace with function body.

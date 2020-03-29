@@ -62,6 +62,7 @@ func shoot():
 	if($FireRate.is_stopped()):
 		$FireRate.start()
 		var b = bullet.instance()
+		
 		$BulletContainer.add_child(b)
 		b.start_at(rotation, $BulletSpawnPoint.global_position)
 

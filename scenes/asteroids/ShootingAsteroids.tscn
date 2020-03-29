@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/players/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/asteroids/ShootingAsteroids.gd" type="Script" id=2]
 [ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/asteroids/AstBullet.tscn" type="PackedScene" id=4]
 
 [node name="ShootingAsteroids" type="Node"]
 script = ExtResource( 2 )
 asteroid = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+bullet = ExtResource( 4 )
 
 [node name="asteroidSpawn" type="Timer" parent="."]
 one_shot = true
+[connection signal="bullet_hit_asteroid" from="." to="." method="_on_ShootingAsteroids_bullet_hit_asteroid"]
