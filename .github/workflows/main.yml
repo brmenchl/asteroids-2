@@ -1,0 +1,44 @@
+name: Build app
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  BUILD_NAME: asteroids-2
+  BUILD_PATH: build/web
+
+jobs:
+  export:
+    name: Checkout and build for web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+      - name: Build web
+        uses: josephbmanley/build-godot-action@v1.3.3
+        with:
+          name: ${{ env.BUILD_NAME }}
+          preset: HTML5
+          subdirectory: web
+          debugMode: true
+
+      - name: Deploy to Github Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v1.3.0
+        with:
+          build_dir: ${{ env.BUILD_PATH }}
+          keep_history: true # This allows us to rollback gh-pages, defaults to false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+
+      - name: Upload web artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.BUILD_NAME }}
+          path: ${{ env.BUILD_PATH }}
