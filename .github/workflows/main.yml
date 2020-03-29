@@ -35,7 +35,7 @@ jobs:
           path: exports
 
       - name: unzip export
-        run: 7z -x exports/HTML5.zip -obuild -y
+        run: 7z x exports/HTML5.zip -obuild -y
 
       - name: log
         run: ls -al build
