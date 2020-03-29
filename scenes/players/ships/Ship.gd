@@ -34,12 +34,12 @@ func process_input(player_name, fire_thruster_map):
 	
 	var thrust_direction = 0
 	if Input.is_action_pressed(player_name + "_thrust"):
-		thrust_direction = 1
+		thrust_direction = -1
 		fire_thruster_map["forward"] = true
 	elif Input.is_action_pressed(player_name + "_reverse_thrust"):
-		thrust_direction = -1
+		thrust_direction = 1
 		fire_thruster_map["reverse"] = true
-	thrust = Vector2(engine_thrust * thrust_direction, 0)
+	thrust = Vector2(0, engine_thrust * thrust_direction)
 
 func _process(delta):
 	var fire_thruster_map = {
