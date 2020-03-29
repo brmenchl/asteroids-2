@@ -2,4 +2,4 @@ extends Node
 
 
 func _ready():
-	$HUD.init_with_players([$Player1, $Player2])
+	$HUD.init_with_players([$ScreenWrappable/Player1, $ScreenWrappable/Player2])

@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/players/bullets/Bullet.gd"
 }, {
-"base": "Area2D",
+"base": "RigidBody2D",
 "class": "Ship",
 "language": "GDScript",
 "path": "res://scenes/players/ships/Ship.gd"

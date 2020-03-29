@@ -1,23 +1,22 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/players/ships/Ship.gd" type="Script" id=1]
 [ext_resource path="res://scenes/players/bullets/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tempAssets/sheet.playerShip1_red.atlastex" type="Texture" id=3]
 [ext_resource path="res://scenes/players/ships/vfx/thrusters/MainThruster.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/vfx/thrusters/SmallThruster.tscn" type="PackedScene" id=5]
-
+[ext_resource path="res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.9548
 height = 11.5388
 
-[node name="Ship" type="Area2D"]
+[node name="Ship" type="RigidBody2D"]
 position = Vector2( 466.876, 243.715 )
+gravity_scale = 0.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 bullet = ExtResource( 2 )
+emittableHullDamageFx = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.4, 0.4 )
@@ -56,4 +55,3 @@ emitting = false
 position = Vector2( 5, -8 )
 rotation = 4.71239
 emitting = false
-[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]

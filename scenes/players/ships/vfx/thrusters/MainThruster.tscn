@@ -2,7 +2,6 @@
 
 [ext_resource path="res://scenes/players/ships/vfx/soft_glow.png" type="Texture" id=1]
 
-
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.17037, 0.614815, 1 )
 colors = PoolColorArray( 0.796875, 0.894073, 1, 1, 0.246155, 0.535852, 0.851563, 1, 0.8125, 0.439873, 0.111084, 1, 1, 1, 1, 0 )

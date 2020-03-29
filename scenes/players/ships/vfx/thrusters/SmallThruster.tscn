@@ -2,13 +2,12 @@
 
 [ext_resource path="res://scenes/players/ships/vfx/soft_glow.png" type="Texture" id=1]
 
-
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.540741, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.133333, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
 [sub_resource type="Curve" id=3]
 max_value = 0.5
@@ -27,7 +26,7 @@ initial_velocity = 300.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 4 )
-color_ramp = SubResource( 7 )
+color_ramp = SubResource( 2 )
 
 [node name="thrusterParticle" type="Particles2D"]
 lifetime = 0.1

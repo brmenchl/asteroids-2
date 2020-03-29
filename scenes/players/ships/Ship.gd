@@ -1,21 +1,22 @@
 class_name Ship
-extends Area2D
+extends RigidBody2D
 
 signal health_changed(new_value)
 
 export var rot_speed = 2.6
 export var thrust = 500
 export var max_velocity = 400
-export var friction = 0.65
 export var playerIdx = ''
 export (PackedScene) var bullet
+export (PackedScene) var emittableHullDamageFx
 
 var rot = 0
 var vel = Vector2()
 var health = 100
-onready var screen_size = get_viewport_rect().size
 onready var texture = ($Sprite as Sprite).texture
 
+func _ready():
+	add_to_group("ship")
 
 func _process(delta):
 	var fire_thruster_map = {
@@ -45,7 +46,7 @@ func _process(delta):
 		fire_thruster_map["reverse"] = true
 	var acc = get_acceleration(thrust_direction)
 	vel += acc * delta
-	position = wrap_screen_edges(position + vel * delta)
+	position = position + vel * delta
 	fire_thrusters(fire_thruster_map)
 
 func get_acceleration(thrust_direction: int):
@@ -63,22 +64,6 @@ func fire_thrusters(fire_thruster_map: Dictionary):
 	for thruster in fire_thruster_map:
 		particle_to_thruster_map.get(thruster).emitting = fire_thruster_map.get(thruster)
 
-func process_forward_thruster():
-	$thrusterParticle.emitting = true
-
-func wrap_screen_edges(pos):
-	var new_pos = pos
-	if pos.x > screen_size.x:
-		new_pos.x = 0
-	if pos.x < 0:
-		new_pos.x = screen_size.x
-	if pos.y > screen_size.y:
-		new_pos.y = 0
-	if pos.y < 0:
-		new_pos.y = screen_size.y
-	return new_pos
-
-
 func shoot():
 	if $FireRate.is_stopped():
 		$FireRate.start()
@@ -87,15 +72,14 @@ func shoot():
 		$BulletContainer.add_child(b)
 		b.start_at(rotation, $BulletSpawnPoint.global_position)
 
-
-func _on_Player_area_entered(area):
-	if area.get_groups().has('bullet'):
-		apply_damage(area.damage)
-		area.queue_free()
-
-
-func apply_damage(damage):
+func hit_by_bullet(position, rotation, damage):
 	health = clamp(health - damage, 0, 100)
 	emit_signal('health_changed', health)
+	
+	var fx = emittableHullDamageFx.instance()
+	fx.position = position
+	fx.rotation = rotation
+	self.get_parent().add_child(fx)
+	
 	if health == 0:
 		queue_free()
