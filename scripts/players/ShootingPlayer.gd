@@ -6,7 +6,7 @@ var screen_size = Vector2()
 
 func _ready():
 	screen_size = get_viewport().size
-	$BottomHud.init_with_players([$Player])
+	$HUD.init_with_players([$Player])
 
 func _on_BulletTimer_timeout():
 	var b = bullet.instance()
