@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Node
 
 export var player_id = ''
 var shoot_input = get_input_name("shoot")
@@ -12,27 +12,15 @@ func get_input_name(action: String):
 	else:
 		return "player" + "_" + action
 
-func process_check_input(delta: float):
+func process_check_input(delta: float, callbacks):
 	if Input.is_action_pressed(shoot_input):
-		shoot()
+		callbacks.shoot()
 
 	if Input.is_action_pressed(left_input):
-		turn_left(delta)
+		callbacks.turn_left(delta)
 		
 	if Input.is_action_pressed(right_input):
-		turn_right(delta)
+		callbacks.turn_right(delta)
 
 	if Input.is_action_pressed(thrust_input):
-		thrust(delta)
-
-func shoot():
-	pass
-
-func turn_left(_delta: float):
-	pass
-
-func turn_right(_delta: float):
-	pass
-
-func thrust(_delta: float):
-	pass
+		callbacks.thrust(delta)
