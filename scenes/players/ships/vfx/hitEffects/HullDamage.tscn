@@ -4,27 +4,27 @@
 [ext_resource path="res://scenes/players/ships/vfx/hitEffects/Emittable.gd" type="Script" id=2]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.188482, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.921569, 0.207843, 0.207843, 0.572549, 1, 1, 1, 0 )
+offsets = PoolRealArray( 0, 0.172775, 0.900524 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.984314, 0.524046, 0.141176, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
-lifetime_randomness = 0.3
+lifetime_randomness = 0.72
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
-spread = 90.13
+spread = 80.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
+initial_velocity = 60.0
 initial_velocity_random = 0.6
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 0.05
+scale = 0.15
 color_ramp = SubResource( 2 )
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.188482, 1 )
+offsets = PoolRealArray( 0, 0.0890052, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.921569, 0.207843, 0.207843, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=5]
@@ -37,37 +37,36 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.23874, 0.0, 0, 0 
 curve = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=8]
-lifetime_randomness = 0.3
+lifetime_randomness = 0.63
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
+direction = Vector3( 0, -1, 0 )
 spread = 10.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 250.0
+initial_velocity = 300.0
 initial_velocity_random = 0.8
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 0.05
+scale = 0.1
 scale_curve = SubResource( 7 )
 color_ramp = SubResource( 5 )
 
 [node name="HullDamageParticles" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="forwardSplash" type="Particles2D" parent="."]
+[node name="fireSplash" type="Particles2D" parent="."]
 emitting = false
 amount = 10
-lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 3 )
 texture = ExtResource( 1 )
 
-[node name="reflectSplash" type="Particles2D" parent="."]
+[node name="laserSplash" type="Particles2D" parent="."]
 emitting = false
-amount = 3
-lifetime = 0.2
+amount = 10
+lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 8 )
