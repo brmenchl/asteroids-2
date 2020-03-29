@@ -22,7 +22,7 @@ jobs:
       
 
 workflows:
-    "Build and deploy to Github Pages!":
+    "Build and deploy to Github Pages":
         jobs:
           - build
           - gh-pages/deploy:
