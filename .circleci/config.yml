@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Export HTML5 preset
           command: godot -v --export "HTML5" ./build/web/index.html
-      - persit_to_workspace:
+      - persist_to_workspace:
           root: build
           paths:
             - web
