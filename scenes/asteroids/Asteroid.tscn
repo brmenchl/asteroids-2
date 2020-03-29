@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/asteroids/hit_effect/HitEffects.tscn" type="PackedScene" id=3]
 
 [node name="Asteroid" type="RigidBody2D"]
-mass = 20.0
+mass = 1000.0
 gravity_scale = 0.0
 script = ExtResource( 2 )
 hit_effect = ExtResource( 3 )

@@ -4,9 +4,9 @@ extends RigidBody2D
 signal health_changed(new_value)
 
 export var rot_speed = 2.6
-export var engine_thrust = 20
-export var spin_thrust = 500
-export var max_velocity = 400
+export var engine_thrust = 100
+export var spin_thrust = 1500
+export var max_speed = 400
 export var playerIdx = ''
 export var health = 100
 export (PackedScene) var bullet
@@ -53,9 +53,12 @@ func _process(delta):
 	fire_thrusters(fire_thruster_map)
 
 func _physics_process(delta):
-	print(thrust)
-	add_central_force(thrust.rotated(rotation))
-	add_torque(rotation_dir * spin_thrust)
+	apply_central_impulse(thrust.rotated(rotation))
+	apply_torque_impulse(rotation_dir * spin_thrust)
+	
+func _integrate_forces(state):
+	if state.linear_velocity.length()>max_speed:
+		state.linear_velocity=state.linear_velocity.normalized()*max_speed
 
 func fire_thrusters(fire_thruster_map: Dictionary):
 	var particle_to_thruster_map = {
