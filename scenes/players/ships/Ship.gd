@@ -4,19 +4,42 @@ extends RigidBody2D
 signal health_changed(new_value)
 
 export var rot_speed = 2.6
-export var thrust = 500
+export var engine_thrust = 20
+export var spin_thrust = 500
 export var max_velocity = 400
 export var playerIdx = ''
+export var health = 100
 export (PackedScene) var bullet
 export (PackedScene) var emittableHullDamageFx
 
-var rot = 0
-var vel = Vector2()
-var health = 100
+var thrust = Vector2()
+var rotation_dir = 0
+
 onready var texture = ($Sprite as Sprite).texture
 
 func _ready():
 	add_to_group("ship")
+
+func process_input(player_name, fire_thruster_map):
+	if Input.is_action_pressed(player_name + "_shoot"):
+		shoot()
+	
+	rotation_dir = 0
+	if Input.is_action_pressed(player_name + "_left"):
+		rotation_dir -= 1
+		fire_thruster_map["starboard"] = true # fires opposite thruster
+	if Input.is_action_pressed(player_name + "_right"):
+		rotation_dir += 1
+		fire_thruster_map["port"] = true # fires opposite thruster
+	
+	var thrust_direction = 0
+	if Input.is_action_pressed(player_name + "_thrust"):
+		thrust_direction = 1
+		fire_thruster_map["forward"] = true
+	elif Input.is_action_pressed(player_name + "_reverse_thrust"):
+		thrust_direction = -1
+		fire_thruster_map["reverse"] = true
+	thrust = Vector2(engine_thrust * thrust_direction, 0)
 
 func _process(delta):
 	var fire_thruster_map = {
@@ -26,32 +49,13 @@ func _process(delta):
 		"starboard": false,
 	}
 	var player_name = "player" + playerIdx
-	if Input.is_action_pressed(player_name + "_shoot"):
-		shoot()
-	
-	if Input.is_action_pressed(player_name + "_left"):
-		rot -= rot_speed * delta
-		fire_thruster_map["starboard"] = true # fires opposite thruster
-	if Input.is_action_pressed(player_name + "_right"):
-		rot += rot_speed * delta
-		fire_thruster_map["port"] = true # fires opposite thruster
-
-	rotation = rot
-	var thrust_direction = 0
-	if Input.is_action_pressed(player_name + "_thrust"):
-		thrust_direction = 1
-		fire_thruster_map["forward"] = true
-	elif Input.is_action_pressed(player_name + "_reverse_thrust"):
-		thrust_direction = -1
-		fire_thruster_map["reverse"] = true
-	var acc = get_acceleration(thrust_direction)
-	apply_central_impulse(acc)
+	process_input(player_name, fire_thruster_map)
 	fire_thrusters(fire_thruster_map)
 
-func get_acceleration(thrust_direction: int):
-	var friction_force = vel * friction
-	var applied_thrust = thrust * thrust_direction
-	return Vector2(applied_thrust, 0).rotated(rotation - PI / 2) - friction_force
+func _physics_process(delta):
+	print(thrust)
+	add_central_force(thrust.rotated(rotation))
+	add_torque(rotation_dir * spin_thrust)
 
 func fire_thrusters(fire_thruster_map: Dictionary):
 	var particle_to_thruster_map = {

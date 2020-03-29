@@ -3,8 +3,9 @@ extends Node2D
 onready var screen_size = get_viewport_rect().size
 
 func _process(delta):
-	for N in get_children():
-		N.position = wrap_screen_edges(N.position)
+	pass
+	#for N in get_children():
+		# N.position = wrap_screen_edges(N.position)
 
 func wrap_screen_edges(pos):
 	var new_pos = pos
