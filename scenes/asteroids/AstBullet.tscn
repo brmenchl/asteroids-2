@@ -24,5 +24,4 @@ shape = SubResource( 1 )
 [node name="Lifetime" type="Timer" parent="."]
 wait_time = 0.6
 autostart = true
-[connection signal="body_shape_entered" from="." to="." method="_on_AstBullet_body_shape_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

@@ -21,7 +21,7 @@ func _on_Lifetime_timeout():
 	queue_free()
 
 
-func _on_AstBullet_body_shape_entered(body_id, body, body_shape, area_shape):
+func _on_Bullet_body_shape_entered(body_id, body, body_shape, area_shape):
 	if (body.is_in_group("asteroid")):
 		body.call_deferred("hit_by_bullet", position)
 		queue_free()

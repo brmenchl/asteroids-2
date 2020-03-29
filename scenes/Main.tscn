@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/Main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/players/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=4]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="HUD" parent="." instance=ExtResource( 2 )]
+
+[node name="AsteroidGroup" type="Node" parent="."]
+
+[node name="Asteroid" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 899.106, 79.1312 )
+rotation = 1.08036
+
+[node name="Asteroid2" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 723.784, 125.884 )
+rotation = -0.675442
+
+[node name="Asteroid3" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 234.832, 213.545 )
+rotation = 1.48702
+
+[node name="Asteroid4" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 556.255, 840.807 )
+rotation = -2.70177
+
+[node name="Asteroid5" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 708.2, 723.925 )
+rotation = -4.45757
+
+[node name="Asteroid6" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 234.832, 213.545 )
+rotation = 1.48702
+
+[node name="Asteroid7" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 1268.68, 671.277 )
+rotation = -0.832522
