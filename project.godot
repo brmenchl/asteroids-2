@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://scripts/players/Bullet.gd"
+"path": "res://scenes/players/Bullet.gd"
 }, {
 "base": "Area2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/players/Player.gd"
+"path": "res://scenes/players/Player.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",

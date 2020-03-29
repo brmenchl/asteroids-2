@@ -1,3 +1,4 @@
+
 extends RigidBody2D
 
 export (PackedScene) var hit_effect
