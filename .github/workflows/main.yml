@@ -27,22 +27,27 @@ jobs:
           create_release: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Upload web artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: exports
+          path: exports
 
-      - name: Log
-        run: ls -al exports
+      - name: unzip export
+        run: 7z -x exports/HTML5.zip -obuild -y
+
+      - name: log
+        run: ls -al build
 
       - name: Deploy to Github Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v1.3.0
         with:
-          build_dir: ${{ env.BUILD_PATH }}
+          build_dir: build
           keep_history: true # This allows us to rollback gh-pages, defaults to false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
 
-      - name: Upload web artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ env.BUILD_NAME }}
-          path: ${{ env.BUILD_PATH }}
+
