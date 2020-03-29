@@ -7,31 +7,28 @@ export var max_velocity = 400
 export var friction = 0.65
 export (PackedScene) var bullet
 
-var screen_size
+onready var screen_size = get_viewport_rect().size
+onready var texture = ($Ship as Sprite).texture
 var rot = 0
 var vel = Vector2()
 var health = 100
-var texture = preload("res://tempAssets/sheet.playerShip1_red.atlastex")
+export var playerIdx = ''
 
 signal health_changed(new_value)
 
-func _ready():
-	screen_size = get_viewport_rect().size
-	position = screen_size / 2
-	($Ship as Sprite).texture = texture;
-
 func _process(delta):
-	if Input.is_action_pressed("player_shoot"):
+	var player_name = "player" + playerIdx
+	if Input.is_action_pressed(player_name + "_shoot"):
 		shoot()
 		
-	if Input.is_action_pressed("player_left"):
+	if Input.is_action_pressed(player_name + "_left"):
 		rot -= rot_speed * delta
-	if Input.is_action_pressed("player_right"):
+	if Input.is_action_pressed(player_name + "_right"):
 		rot += rot_speed * delta
 	
 	rotation = rot
 	
-	var acc = get_acceleration(Input.is_action_pressed("player_thrust"))
+	var acc = get_acceleration(Input.is_action_pressed(player_name + "_thrust"))
 	vel += acc * delta
 	position = wrap_screen_edges(position + vel * delta)
 
