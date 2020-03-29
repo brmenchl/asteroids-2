@@ -28,21 +28,18 @@ func _process(delta):
 		rot += rot_speed * delta
 
 	rotation = rot
-
-	var acc = get_acceleration(Input.is_action_pressed(player_name + "_thrust"))
+	var thrust_direction = 0
+	if Input.is_action_pressed(player_name + "_thrust"):
+		thrust_direction = 1
+	elif Input.is_action_pressed(player_name + "_reverse_thrust"):
+		thrust_direction = -1
+	var acc = get_acceleration(thrust_direction)
 	vel += acc * delta
 	position = wrap_screen_edges(position + vel * delta)
 
-
-func get_acceleration(is_thrusting: bool):
+func get_acceleration(thrust_direction: int):
 	var friction_force = vel * friction
-	var applied_thrust
-
-	if is_thrusting:
-		applied_thrust = thrust
-	else:
-		applied_thrust = 0
-
+	var applied_thrust = thrust * thrust_direction
 	return Vector2(applied_thrust, 0).rotated(rotation - PI / 2) - friction_force
 
 
