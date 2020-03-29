@@ -54,10 +54,6 @@ texture = ExtResource( 6 )
 script = ExtResource( 7 )
 
 [node name="Player1" parent="ScreenWrappable" instance=ExtResource( 3 )]
-linear_damp = -1.0
-angular_damp = -1.0
 
 [node name="Player2" parent="ScreenWrappable" instance=ExtResource( 5 )]
 position = Vector2( 205.581, 397.527 )
-linear_damp = -1.0
-angular_damp = -1.0

@@ -8,21 +8,21 @@
 radius = 21.1902
 height = 48.5409
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.188482, 0.382199, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.725391, 0.710938, 1, 0.589821, 0.11011, 0.108778, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=4]
 max_value = 0.5
 _data = [ Vector2( 0.0093458, 0.157386 ), 0.0, -0.0136524, 0, 0, Vector2( 1, 0 ), -0.755294, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 1.0
@@ -30,8 +30,8 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 500.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 3 )
-color_ramp = SubResource( 6 )
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [node name="Bullet" type="Area2D"]
 z_index = -2
@@ -58,7 +58,7 @@ autostart = true
 position = Vector2( 0, -13 )
 z_index = 1
 lifetime = 0.2
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 texture = ExtResource( 3 )
 [connection signal="body_shape_entered" from="." to="." method="_on_Bullet_body_shape_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

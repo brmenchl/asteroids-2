@@ -15,10 +15,9 @@ height = 11.5388
 position = Vector2( 466.876, 243.715 )
 mass = 50.0
 gravity_scale = 0.0
-linear_damp = 200.0
-angular_damp = 5.0
+linear_damp = 0.8
+angular_damp = 4.0
 script = ExtResource( 1 )
-engine_thrust = 150
 bullet = ExtResource( 2 )
 emittableHullDamageFx = ExtResource( 6 )
 

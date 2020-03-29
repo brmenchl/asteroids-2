@@ -3,10 +3,9 @@ extends RigidBody2D
 
 signal health_changed(new_value)
 
-export var rot_speed = 2.6
-export var engine_thrust = 100
-export var spin_thrust = 1500
-export var max_speed = 400
+export var engine_thrust = 800
+export var spin_thrust = 5000
+export var max_speed = 420
 export var playerIdx = ''
 export var health = 100
 export (PackedScene) var bullet
@@ -41,7 +40,7 @@ func process_input(player_name, fire_thruster_map):
 		fire_thruster_map["reverse"] = true
 	thrust = Vector2(0, engine_thrust * thrust_direction)
 
-func _process(delta):
+func _process(_delta):
 	var fire_thruster_map = {
 		"forward": false,
 		"reverse": false,
@@ -52,10 +51,10 @@ func _process(delta):
 	process_input(player_name, fire_thruster_map)
 	fire_thrusters(fire_thruster_map)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	apply_central_impulse(thrust.rotated(rotation))
 	apply_torque_impulse(rotation_dir * spin_thrust)
-	
+
 func _integrate_forces(state):
 	if state.linear_velocity.length()>max_speed:
 		state.linear_velocity=state.linear_velocity.normalized()*max_speed
