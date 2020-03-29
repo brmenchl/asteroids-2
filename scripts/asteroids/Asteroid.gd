@@ -2,6 +2,7 @@ extends RigidBody2D
 
 export (PackedScene) var hit_effect
 
+
 func _ready():
 	add_to_group('asteroid')
 
