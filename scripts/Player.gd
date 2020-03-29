@@ -1,4 +1,5 @@
 extends Area2D
+class_name Player
 
 export var rot_speed = 2.6
 export var thrust = 500
@@ -10,10 +11,14 @@ var screen_size
 var rot = 0
 var vel = Vector2()
 var health = 100
+var texture = preload("res://tempAssets/sheet.playerShip1_red.atlastex")
+
+signal health_changed(new_value)
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	position = screen_size / 2
+	($Ship as Sprite).texture = texture;
 
 func _process(delta):
 	if Input.is_action_pressed("player_shoot"):
@@ -67,5 +72,6 @@ func _on_Player_area_entered(area):
 
 func apply_damage(damage):
 	health = clamp(health - damage, 0, 100)
+	emit_signal('health_changed', health)
 	if health == 0:
 		queue_free()

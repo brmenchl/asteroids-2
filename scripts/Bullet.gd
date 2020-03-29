@@ -1,4 +1,5 @@
 extends Area2D
+class_name Bullet
 
 var vel = Vector2()
 export var speed = 1000
