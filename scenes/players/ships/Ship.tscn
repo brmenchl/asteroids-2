@@ -3,8 +3,9 @@
 [ext_resource path="res://scenes/players/ships/Ship.gd" type="Script" id=1]
 [ext_resource path="res://scenes/players/bullets/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tempAssets/sheet.playerShip1_red.atlastex" type="Texture" id=3]
-[ext_resource path="res://scenes/players/vfx/thrusters/MainThruster.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/players/vfx/thrusters/SmallThruster.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/players/ships/vfx/thrusters/MainThruster.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/players/ships/vfx/thrusters/SmallThruster.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.9548
