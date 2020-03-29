@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/players/ships/Player1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/Player2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/mainAssets/background.jpg" type="Texture" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -45,3 +46,10 @@ rotation = -0.832522
 
 [node name="Player2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 205.581, 397.527 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
+position = Vector2( 796.383, 456.177 )
+scale = Vector2( 0.868156, 0.868156 )
+z_index = -100
+texture = ExtResource( 6 )
