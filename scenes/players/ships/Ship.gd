@@ -51,13 +51,13 @@ func _process(_delta):
 	process_input(player_name, fire_thruster_map)
 	fire_thrusters(fire_thruster_map)
 
-func _physics_process(_delta):
+func _integrate_forces(state):
 	apply_central_impulse(thrust.rotated(rotation))
 	apply_torque_impulse(rotation_dir * spin_thrust)
-
-func _integrate_forces(state):
 	if state.linear_velocity.length()>max_speed:
 		state.linear_velocity=state.linear_velocity.normalized()*max_speed
+	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
+	state.set_transform(transformation)
 
 func fire_thrusters(fire_thruster_map: Dictionary):
 	var particle_to_thruster_map = {

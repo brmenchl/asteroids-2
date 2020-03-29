@@ -13,3 +13,7 @@ func hit_by_bullet(position, rotation, damage):
 	hit_fx.position = position
 	hit_fx.rotation = rotation
 	self.get_parent().add_child(hit_fx)
+
+func _integrate_forces(state):
+	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
+	state.set_transform(transformation)

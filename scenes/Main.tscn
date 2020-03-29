@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/Player2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/mainAssets/background.jpg" type="Texture" id=6]
-[ext_resource path="res://scenes/ScreenWrappable.gd" type="Script" id=7]
+[ext_resource path="res://scenes/utils/ScreenWrappable.gd" type="Script" id=7]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )

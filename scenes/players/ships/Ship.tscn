@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/players/ships/Ship.gd" type="Script" id=1]
 [ext_resource path="res://scenes/players/bullets/Bullet.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/players/ships/vfx/thrusters/MainThruster.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/vfx/thrusters/SmallThruster.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/utils/ScreenWrappable.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.9548
@@ -58,3 +59,5 @@ emitting = false
 position = Vector2( 5, -8 )
 rotation = 4.71239
 emitting = false
+
+[node name="ScreenWrappable" parent="." instance=ExtResource( 7 )]
