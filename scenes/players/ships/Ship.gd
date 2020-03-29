@@ -5,7 +5,7 @@ signal health_changed(new_value)
 
 export var engine_thrust = 800
 export var spin_thrust = 5000
-export var max_speed = 420
+export var max_speed = 280
 export var playerIdx = ''
 export var health = 100
 export (PackedScene) var bullet
