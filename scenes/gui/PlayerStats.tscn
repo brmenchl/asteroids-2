@@ -4,8 +4,6 @@
 [ext_resource path="res://tempAssets/sheet.playerShip3_red.atlastex" type="Texture" id=2]
 [ext_resource path="res://scenes/gui/PlayerStats.gd" type="Script" id=3]
 
-
-
 [node name="PlayerStats" type="HBoxContainer"]
 anchor_left = 0.5
 anchor_top = 0.5

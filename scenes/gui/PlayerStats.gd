@@ -4,7 +4,7 @@ onready var health_label: Label = $MarginContainer/Background/Health
 onready var player_image: TextureRect = $MarginContainer/Background/Image
 
 
-func init_with_player(player: Player):
+func init_with_player(player: Ship):
 	update_health(player.health)
 	player_image.texture = player.texture
 	var err = player.connect("health_changed", self, "update_health")

@@ -1,4 +1,4 @@
-class_name Player
+class_name Ship
 extends Area2D
 
 signal health_changed(new_value)
@@ -14,7 +14,7 @@ var rot = 0
 var vel = Vector2()
 var health = 100
 onready var screen_size = get_viewport_rect().size
-onready var texture = ($Ship as Sprite).texture
+onready var texture = ($Sprite as Sprite).texture
 
 
 func _process(delta):

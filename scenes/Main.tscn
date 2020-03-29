@@ -2,9 +2,9 @@
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/players/Player1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/players/ships/Player1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/players/Player2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/players/ships/Player2.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -41,7 +41,7 @@ rotation = 1.48702
 position = Vector2( 1268.68, 671.277 )
 rotation = -0.832522
 
-[node name="Player2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 712.876, 407.715 )
-
 [node name="Player1" parent="." instance=ExtResource( 3 )]
+
+[node name="Player2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 205.581, 397.527 )

@@ -12,16 +12,16 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://scenes/players/Bullet.gd"
+"path": "res://scenes/players/bullets/Bullet.gd"
 }, {
 "base": "Area2D",
-"class": "Player",
+"class": "Ship",
 "language": "GDScript",
-"path": "res://scenes/players/Player.gd"
+"path": "res://scenes/players/ships/Ship.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"Player": ""
+"Ship": ""
 }
 
 [application]
