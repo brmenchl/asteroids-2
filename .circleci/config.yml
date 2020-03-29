@@ -27,3 +27,11 @@ jobs:
       - run:
           name: ls
           command: ls -al build/web
+
+workflows:
+    "Build and deploy to Github Pages":
+        jobs:
+          - build
+          - deploy-github-pages:
+              requires:
+                - build
