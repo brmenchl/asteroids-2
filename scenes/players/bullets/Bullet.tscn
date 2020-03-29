@@ -1,11 +1,37 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/players/bullets/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://tempAssets/sheet.laserRed16.atlastex" type="Texture" id=2]
+[ext_resource path="res://scenes/mainAssets/soft_glow.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.53787
-height = 41.8368
+radius = 21.1902
+height = 48.5409
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.188482, 0.382199, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.725391, 0.710938, 1, 0.589821, 0.11011, 0.108778, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=2]
+max_value = 0.5
+_data = [ Vector2( 0.0093458, 0.157386 ), 0.0, -0.0136524, 0, 0, Vector2( 1, 0 ), -0.755294, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 6 )
 
 [node name="Bullet" type="Area2D"]
 z_index = -2
@@ -15,15 +41,24 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.6, 0.5 )
+position = Vector2( 0, -9.02 )
+scale = Vector2( 1, 0.6 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2( 0.4, 0.4 )
 shape = SubResource( 1 )
 
 [node name="Lifetime" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 1.2
 autostart = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -13 )
+z_index = 1
+lifetime = 0.2
+process_material = SubResource( 4 )
+texture = ExtResource( 3 )
 [connection signal="body_shape_entered" from="." to="." method="_on_Bullet_body_shape_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

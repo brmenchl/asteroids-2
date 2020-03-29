@@ -45,8 +45,7 @@ func _process(delta):
 		thrust_direction = -1
 		fire_thruster_map["reverse"] = true
 	var acc = get_acceleration(thrust_direction)
-	vel += acc * delta
-	position = position + vel * delta
+	apply_central_impulse(acc)
 	fire_thrusters(fire_thruster_map)
 
 func get_acceleration(thrust_direction: int):

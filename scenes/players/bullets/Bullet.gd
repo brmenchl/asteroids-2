@@ -1,8 +1,8 @@
 class_name Bullet
 extends Area2D
 
-export var speed = 1000
-export var damage = 5
+export var speed = 600
+export var damage = 10
 var vel = Vector2()
 
 func _ready():

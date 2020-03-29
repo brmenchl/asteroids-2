@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/soft_glow.png-6937daf10640a3063f85749e6af23e0c.stex"
+path="res://.import/soft_glow.png-a3c319b8eaf546f5469f79502e43b455.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/players/ships/vfx/soft_glow.png"
-dest_files=[ "res://.import/soft_glow.png-6937daf10640a3063f85749e6af23e0c.stex" ]
+source_file="res://scenes/mainAssets/soft_glow.png"
+dest_files=[ "res://.import/soft_glow.png-a3c319b8eaf546f5469f79502e43b455.stex" ]
 
 [params]
 
