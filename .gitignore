@@ -9,3 +9,4 @@ export.cfg
 .mono/
 mono_crash.*.json
 data_*/
+build
