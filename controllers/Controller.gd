@@ -11,14 +11,15 @@ func _unhandled_input(_p_event: InputEvent) -> void:
 
 
 func _process(_delta):
-	target.move(
-		{
-			"left": Input.is_action_pressed(get_input_name("left")),
-			"right": Input.is_action_pressed(get_input_name("right")),
-			"thrust": Input.is_action_pressed(get_input_name("thrust")),
-			"reverse_thrust": Input.is_action_pressed(get_input_name("reverse_thrust"))
-		}
-	)
+	if target.has_method("move"):
+		target.move(
+			{
+				"left": Input.is_action_pressed(get_input_name("left")),
+				"right": Input.is_action_pressed(get_input_name("right")),
+				"thrust": Input.is_action_pressed(get_input_name("thrust")),
+				"reverse_thrust": Input.is_action_pressed(get_input_name("reverse_thrust"))
+			}
+		)
 
 
 func get_input_name(action: String) -> String:
