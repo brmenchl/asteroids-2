@@ -8,7 +8,6 @@ var vel = Vector2()
 
 func _ready():
 	add_to_group('bullet')
-	set_physics_process(true)
 
 
 func start_at(rot, pos):

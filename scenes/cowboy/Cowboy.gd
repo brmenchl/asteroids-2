@@ -1,8 +1,8 @@
 class_name Cowboy
 extends RigidBody2D
 
-export var spin_thrust = 100
-export var max_speed = 280
+export var spin_thrust := 100
+export var max_speed := 280
 export var bullet_force := 500
 export var shots_per_second := 3
 

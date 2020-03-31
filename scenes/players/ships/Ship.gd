@@ -12,6 +12,7 @@ export (float) var fire_rate = 0.3
 var fire_rate_timer: Timer = null
 onready var texture = ($Sprite as Sprite).texture
 
+const bullet = preload("res://scenes/players/bullets/Bullet.tscn")
 
 func _get_configuration_warning() -> String:
 	if $ScreenWrappable == null:
@@ -64,9 +65,9 @@ func fire_thrusters(fire_thruster_map):
 func shoot():
 	if fire_rate_timer.is_stopped():
 		fire_rate_timer.start()
-		var bullet = Bullet.instance()
-		$BulletContainer.add_child(bullet)
-		bullet.start_at(rotation, $BulletSpawnPoint.global_position)
+		var b = bullet.instance()
+		$BulletContainer.add_child(b)
+		b.start_at(rotation, $BulletSpawnPoint.global_position)
 
 
 func hit_by_bullet(position: float, rotation: float, damage: int):
