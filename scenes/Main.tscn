@@ -49,9 +49,9 @@ scale = Vector2( 0.868156, 0.868156 )
 z_index = -100
 texture = ExtResource( 6 )
 
-[node name="ScreenWrappable" type="Node2D" parent="."]
+[node name="Players" type="Node" parent="."]
 
-[node name="Player1" parent="ScreenWrappable" instance=ExtResource( 3 )]
+[node name="Player1" parent="Players" instance=ExtResource( 3 )]
 
-[node name="Player2" parent="ScreenWrappable" instance=ExtResource( 5 )]
+[node name="Player2" parent="Players" instance=ExtResource( 5 )]
 position = Vector2( 205.581, 397.527 )
