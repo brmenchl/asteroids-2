@@ -1,4 +1,3 @@
-class_name EmittableHullDamageFx
 extends Node2D
 
 

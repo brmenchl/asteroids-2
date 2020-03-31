@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/cowboy/Cowboy.gd"
 }, {
-"base": "Node2D",
-"class": "EmittableHullDamageFx",
-"language": "GDScript",
-"path": "res://scenes/players/ships/vfx/hitEffects/Emittable.gd"
-}, {
 "base": "RigidBody2D",
 "class": "Ship",
 "language": "GDScript",
@@ -38,7 +33,6 @@ _global_script_class_icons={
 "Bullet": "",
 "Controller": "",
 "Cowboy": "",
-"EmittableHullDamageFx": "",
 "Ship": ""
 }
 
