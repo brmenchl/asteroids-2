@@ -21,27 +21,28 @@ animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "shoot",
-"speed": 5.0
+"speed": 1.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 11.3001
-height = 21.1908
+radius = 12.7387
+height = 16.9249
 
 [node name="Cowboy" type="RigidBody2D"]
 position = Vector2( 802.998, 452.29 )
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
+linear_damp = 0.7
+angular_damp = 3.0
 script = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -10, 8 )
 frames = SubResource( 2 )
 animation = "idle"
-offset = Vector2( 10, -8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -10, 8 )
+position = Vector2( -3.5293, 0 )
 shape = SubResource( 3 )
 
 [node name="Node" type="Node" parent="."]

@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://scenes/players/bullets/Bullet.gd"
 }, {
 "base": "RigidBody2D",
+"class": "Cowboy",
+"language": "GDScript",
+"path": "res://scenes/cowboy/Cowboy.gd"
+}, {
+"base": "RigidBody2D",
 "class": "Ship",
 "language": "GDScript",
 "path": "res://scenes/players/ships/Ship.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"Cowboy": "",
 "Ship": ""
 }
 
