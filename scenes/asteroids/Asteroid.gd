@@ -7,7 +7,7 @@ func _ready():
 	add_to_group('asteroid')
 
 
-func hit_by_bullet(position, rotation, damage):
+func hit_by_bullet(position, rotation, _damage):
 	var hit_fx = hit_effect.instance()
 	hit_fx.position = position
 	hit_fx.rotation = rotation

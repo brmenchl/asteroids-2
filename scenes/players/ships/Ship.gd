@@ -12,10 +12,12 @@ export (float) var fire_rate = 0.3
 var fire_rate_timer: Timer = null
 onready var texture = ($Sprite as Sprite).texture
 
+
 func _get_configuration_warning() -> String:
-	if ($ScreenWrappable == null):
+	if $ScreenWrappable == null:
 		return "Must have a ScreenWrappable child"
 	return ""
+
 
 func _ready():
 	add_to_group("ship")
@@ -42,8 +44,9 @@ func move(directions):
 func _integrate_forces(state):
 	if state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
-	var transformation: Transform2D = \
-		$ScreenWrappable.screen_wrapped_transformation(state.get_transform())
+	var transformation: Transform2D = $ScreenWrappable.screen_wrapped_transformation(
+		state.get_transform()
+	)
 	state.set_transform(transformation)
 
 
