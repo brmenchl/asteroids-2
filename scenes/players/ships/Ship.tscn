@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/players/ships/Ship.gd" type="Script" id=1]
-[ext_resource path="res://scenes/players/bullets/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tempAssets/sheet.playerShip1_red.atlastex" type="Texture" id=3]
 [ext_resource path="res://scenes/players/ships/vfx/thrusters/MainThruster.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/vfx/thrusters/SmallThruster.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/utils/ScreenWrappable.tscn" type="PackedScene" id=7]
+[ext_resource path="res://controllers/Pawn.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.9548
@@ -19,8 +18,6 @@ gravity_scale = 0.0
 linear_damp = 0.8
 angular_damp = 4.0
 script = ExtResource( 1 )
-bullet = ExtResource( 2 )
-emittableHullDamageFx = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.4, 0.4 )
@@ -34,10 +31,6 @@ shape = SubResource( 1 )
 
 [node name="BulletSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 0, -40 )
-
-[node name="FireRate" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
 
 [node name="ThrusterParticles" type="Node2D" parent="."]
 
@@ -61,3 +54,5 @@ rotation = 4.71239
 emitting = false
 
 [node name="ScreenWrappable" parent="." instance=ExtResource( 7 )]
+
+[node name="Pawn" parent="." instance=ExtResource( 8 )]

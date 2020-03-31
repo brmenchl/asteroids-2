@@ -3,64 +3,52 @@ extends RigidBody2D
 
 signal health_changed(new_value)
 
-export var engine_thrust = 800
-export var spin_thrust = 5000
-export var max_speed = 280
-export var playerIdx = ''
-export var health = 100
-export (PackedScene) var bullet
-export (PackedScene) var emittableHullDamageFx
+export (int) var engine_thrust = 800
+export (int) var spin_thrust = 5000
+export (int) var max_speed = 280
+export (int) var health = 100
+export (float) var fire_rate = 0.3
 
-var thrust = Vector2()
-var rotation_dir = 0
-
+var fire_rate_timer: Timer = null
 onready var texture = ($Sprite as Sprite).texture
+
+func _get_configuration_warning() -> String:
+	if ($ScreenWrappable == null):
+		return "Must have a ScreenWrappable child"
+	return ""
 
 func _ready():
 	add_to_group("ship")
+	fire_rate_timer = Timer.new()
+	fire_rate_timer.one_shot = true
+	fire_rate_timer.wait_time = fire_rate
+	add_child(fire_rate_timer)
 
-func process_input(player_name, fire_thruster_map):
-	if Input.is_action_pressed(player_name + "_shoot"):
-		shoot()
-	
-	rotation_dir = 0
-	if Input.is_action_pressed(player_name + "_left"):
-		rotation_dir -= 1
-		fire_thruster_map["starboard"] = true # fires opposite thruster
-	if Input.is_action_pressed(player_name + "_right"):
-		rotation_dir += 1
-		fire_thruster_map["port"] = true # fires opposite thruster
-	
-	var thrust_direction = 0
-	if Input.is_action_pressed(player_name + "_thrust"):
-		thrust_direction = -1
-		fire_thruster_map["forward"] = true
-	elif Input.is_action_pressed(player_name + "_reverse_thrust"):
-		thrust_direction = 1
-		fire_thruster_map["reverse"] = true
-	thrust = Vector2(0, engine_thrust * thrust_direction)
 
-func _process(_delta):
-	var fire_thruster_map = {
-		"forward": false,
-		"reverse": false,
-		"port": false,
-		"starboard": false,
+func move(directions):
+	var rotation_dir := -int(directions.left) + int(directions.right)
+	apply_torque_impulse(rotation_dir * spin_thrust)
+	var thrust_direction := -int(directions.thrust) + int(directions.reverse_thrust)
+	apply_central_impulse(Vector2(0, engine_thrust * thrust_direction).rotated(rotation))
+	var fire_thruster_map := {
+		"forward": directions.thrust,
+		"reverse": directions.reverse_thrust,
+		"port": directions.right,  # fires opposite thruster
+		"starboard": directions.left,  # fires opposite thruster
 	}
-	var player_name = "player" + playerIdx
-	process_input(player_name, fire_thruster_map)
 	fire_thrusters(fire_thruster_map)
 
+
 func _integrate_forces(state):
-	apply_central_impulse(thrust.rotated(rotation))
-	apply_torque_impulse(rotation_dir * spin_thrust)
-	if state.linear_velocity.length()>max_speed:
-		state.linear_velocity=state.linear_velocity.normalized()*max_speed
-	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
+	if state.linear_velocity.length() > max_speed:
+		state.linear_velocity = state.linear_velocity.normalized() * max_speed
+	var transformation: Transform2D = \
+		$ScreenWrappable.screen_wrapped_transformation(state.get_transform())
 	state.set_transform(transformation)
 
-func fire_thrusters(fire_thruster_map: Dictionary):
-	var particle_to_thruster_map = {
+
+func fire_thrusters(fire_thruster_map):
+	var particle_to_thruster_map := {
 		"forward": $ThrusterParticles/ForwardThrusterParticle,
 		"reverse": $ThrusterParticles/ReverseThrusterParticle,
 		"port": $ThrusterParticles/PortThrusterParticle,
@@ -69,22 +57,23 @@ func fire_thrusters(fire_thruster_map: Dictionary):
 	for thruster in fire_thruster_map:
 		particle_to_thruster_map.get(thruster).emitting = fire_thruster_map.get(thruster)
 
+
 func shoot():
-	if $FireRate.is_stopped():
-		$FireRate.start()
-		var b = bullet.instance()
+	if fire_rate_timer.is_stopped():
+		fire_rate_timer.start()
+		var bullet = Bullet.instance()
+		$BulletContainer.add_child(bullet)
+		bullet.start_at(rotation, $BulletSpawnPoint.global_position)
 
-		$BulletContainer.add_child(b)
-		b.start_at(rotation, $BulletSpawnPoint.global_position)
 
-func hit_by_bullet(position, rotation, damage):
+func hit_by_bullet(position: float, rotation: float, damage: int):
 	health = clamp(health - damage, 0, 100)
 	emit_signal('health_changed', health)
-	
-	var fx = emittableHullDamageFx.instance()
+
+	var fx = EmittableHullDamageFx.instance()
 	fx.position = position
 	fx.rotation = rotation
-	self.get_parent().add_child(fx)
-	
+	get_parent().add_child(fx)
+
 	if health == 0:
 		queue_free()
