@@ -22,8 +22,11 @@ func shoot():
 		apply_central_impulse(shot_impulse)
 		$AnimatedSprite.animation = "shoot"
 		$AnimatedSprite.play()
+		yield($AnimatedSprite, 'animation_finished')
+		$AnimatedSprite.stop()
+		$AnimatedSprite.animation = "idle"
 
 
-func _on_AnimatedSprite_animation_finished():
-	$AnimatedSprite.stop()
-	$AnimatedSprite.animation = "idle"
+func _integrate_forces(state: Physics2DDirectBodyState) -> void:
+	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
+	state.set_transform(transformation)
