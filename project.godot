@@ -14,10 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/players/bullets/Bullet.gd"
 }, {
+"base": "Node",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://controllers/Controller.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Cowboy",
 "language": "GDScript",
 "path": "res://scenes/cowboy/Cowboy.gd"
+}, {
+"base": "Node2D",
+"class": "EmittableHullDamageFx",
+"language": "GDScript",
+"path": "res://scenes/players/ships/vfx/hitEffects/Emittable.gd"
 }, {
 "base": "RigidBody2D",
 "class": "Ship",
@@ -26,7 +36,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"Controller": "",
 "Cowboy": "",
+"EmittableHullDamageFx": "",
 "Ship": ""
 }
 
@@ -35,6 +47,10 @@ _global_script_class_icons={
 config/name="Asteroids-2"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Controllers="*res://controllers/Controllers.tscn"
 
 [display]
 
