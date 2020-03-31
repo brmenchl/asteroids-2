@@ -13,7 +13,8 @@ var fire_rate_timer: Timer = null
 onready var texture = ($Sprite as Sprite).texture
 
 const bullet = preload("res://scenes/players/bullets/Bullet.tscn")
-const emittable_hull_damage_fx = preload("res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn")
+const emittable_damage_fx = preload("res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn")
+
 
 func _get_configuration_warning() -> String:
 	if $ScreenWrappable == null:
@@ -76,7 +77,7 @@ func hit_by_bullet(position, rotation, damage: int):
 	health = clamp(health - damage, 0, 100)
 	emit_signal('health_changed', health)
 
-	var fx = emittable_hull_damage_fx.instance()
+	var fx = emittable_damage_fx.instance()
 	fx.position = position
 	fx.rotation = rotation
 	get_parent().add_child(fx)
