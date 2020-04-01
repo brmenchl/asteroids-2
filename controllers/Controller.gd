@@ -4,17 +4,14 @@ extends Node
 var target: Node = null setget set_target
 
 
-func _unhandled_key_input(_event: InputEventKey) -> void:
-	if Input.is_action_pressed(get_input_name("shoot")):
-		if target != null and target.has_method("shoot"):
-			target.shoot()
-
-
 func _process(_delta):
 	if target != null:
 		if target.has_method("shoot"):
 			if Input.is_action_pressed(get_input_name("shoot")):
 				target.shoot()
+		if target.has_method("secondary"):
+			if Input.is_action_pressed(get_input_name("secondary")):
+				target.secondary()
 		if target.has_method("move"):
 			target.move(
 				{
