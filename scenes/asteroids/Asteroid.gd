@@ -11,8 +11,8 @@ var ghost
 func _ready():
 	add_to_group('asteroid')
 	decoupler_node = Node.new()
-	get_tree().get_root().get_node("Main/WrapperAreas/VerticalWrapArea").connect("body_entered", self, "_on_VerticalWrapArea_body_entered", [], Object.CONNECT_ONESHOT)
-	get_tree().get_root().get_node("Main/WrapperAreas/PlayArea").connect("body_exited", self, "_on_PlayArea_body_exited", [], Object.CONNECT_ONESHOT)
+	#get_tree().get_root().get_node("Main/WrapperAreas/VerticalWrapArea").connect("body_entered", self, "_on_VerticalWrapArea_body_entered", [], Object.CONNECT_ONESHOT)
+	#get_tree().get_root().get_node("Main/WrapperAreas/PlayArea").connect("body_exited", self, "_on_PlayArea_body_exited", [], Object.CONNECT_ONESHOT)
 	
 
 func hit_by_bullet(position, rotation, _damage):
