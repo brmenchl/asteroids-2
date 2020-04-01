@@ -28,7 +28,6 @@ func target_lost():
 
 
 func set_target(_target: Node):
-	print("SETTING TARGET", _target.name)
 	if target != null:
 		target.disconnect("tree_exiting", self, "target_lost")
 	target = _target
