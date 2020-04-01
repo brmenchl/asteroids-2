@@ -12,6 +12,14 @@ script = ExtResource( 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
+[node name="Sprite" type="TextureRect" parent="."]
+modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
+texture = ExtResource( 6 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AsteroidGroup" type="Node" parent="."]
 
 [node name="Asteroid" parent="AsteroidGroup" instance=ExtResource( 4 )]
@@ -41,13 +49,6 @@ rotation = 1.48702
 [node name="Asteroid7" parent="AsteroidGroup" instance=ExtResource( 4 )]
 position = Vector2( 1268.68, 671.277 )
 rotation = -0.832522
-
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
-position = Vector2( 796.383, 456.177 )
-scale = Vector2( 0.868156, 0.868156 )
-z_index = -100
-texture = ExtResource( 6 )
 
 [node name="Players" type="Node" parent="."]
 

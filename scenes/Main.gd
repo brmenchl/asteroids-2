@@ -3,6 +3,7 @@ extends Node
 
 func _ready():
 	$HUD.init_with_players([$Players/Player1, $Players/Player2])
+	
 
 
 func _process(_delta: float) -> void:
