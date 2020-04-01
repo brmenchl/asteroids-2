@@ -13,10 +13,11 @@ var is_ejected := false
 var eject_timer = Timer.new()
 var lasso_extended := false
 var lasso = null
+var is_reeling := false
+
 
 func _ready():
 	randomize()
-
 	$AnimatedSprite.speed_scale = shots_per_second * 4
 	eject_timer.wait_time = 0.5
 	eject_timer.one_shot = true
@@ -38,6 +39,7 @@ func shoot():
 		$AnimatedSprite.stop()
 		$AnimatedSprite.animation = "idle"
 
+
 func secondary():
 	if control_enabled and ! lasso_extended:
 		lasso = LASSO.instance()
@@ -45,7 +47,8 @@ func secondary():
 		lasso.start_at(rotation, global_position)
 		lasso_extended = true
 		lasso.connect("tree_exited", self, "reset_lasso")
-		
+
+
 func reset_lasso():
 	lasso = null
 	lasso_extended = false
