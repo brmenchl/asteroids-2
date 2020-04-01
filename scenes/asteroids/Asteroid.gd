@@ -13,8 +13,8 @@ var ghost
 func _ready():
 	add_to_group('asteroid')
 	decoupler_node = Node.new()
-	#get_tree().get_root().get_node("Main/WrapperAreas/VerticalWrapArea").connect("body_entered", self, "_on_VerticalWrapArea_body_entered", [], Object.CONNECT_ONESHOT)
-	#get_tree().get_root().get_node("Main/WrapperAreas/PlayArea").connect("body_exited", self, "_on_PlayArea_body_exited", [], Object.CONNECT_ONESHOT)
+	get_tree().get_root().get_node("Main/ScreenWrapperAreas/WrapArea").connect("body_entered", self, "_on_WrapArea_body_entered", [], Object.CONNECT_ONESHOT)
+	get_tree().get_root().get_node("Main/ScreenWrapperAreas/PlayArea").connect("body_exited", self, "_on_PlayArea_body_exited", [], Object.CONNECT_ONESHOT)
 
 
 func hit_by_bullet(position, rotation, _damage):
@@ -41,26 +41,28 @@ func spawn_ghost():
 	ghost.name = get_name() + "-jr"
 	decoupler_node.add_child(ghost)
 	add_child(decoupler_node)
+	
 
 
-func _on_VerticalWrapArea_body_entered(_body):
-	if ! ghost:
-		call_deferred("spawn_ghost")
+func _on_WrapArea_body_entered(body):
+	if body.is_in_group("asteroid") && !body.ghost:
+		print(body.get_name() + " is going to spawn " + body.get_name() + "-jr")
+		body.call_deferred("spawn_ghost")
 
 
 func promote_ghost():
-	if ! ghost_promoted:
-		print("promoted!")
+	if !ghost_promoted && ghost:
 		var parent = get_parent()
 		decoupler_node.remove_child(ghost)
 		ghost.is_ghost = false
 		parent.add_child(ghost)
 		ghost_promoted = true
+		print("promoted!")
 
 
-func _on_PlayArea_body_exited(_body):
+func _on_PlayArea_body_exited(body):
 	# promote ghost to be a sibling
-	if ! is_ghost:
-		print("should be promoting")
-		call_deferred("promote_ghost")
-		queue_free()
+	if body.is_in_group("asteroid") && !body.is_ghost:
+		print(body.get_name() + " is going to promote " + body.ghost.get_name())
+		body.call_deferred("promote_ghost")
+		body.queue_free()

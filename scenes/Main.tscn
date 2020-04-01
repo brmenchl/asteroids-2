@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/Player2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/mainAssets/background.jpg" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 800, 88 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 800, 449.952 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -21,36 +27,32 @@ texture = ExtResource( 6 )
 [node name="AsteroidGroup" type="Node" parent="."]
 
 [node name="Asteroid" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 899.106, 79.1312 )
+position = Vector2( 781.354, 142.536 )
 rotation = 1.08036
-
-[node name="Asteroid2" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 723.784, 125.884 )
-rotation = -0.675442
-
-[node name="Asteroid3" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 234.832, 213.545 )
-rotation = 1.48702
-
-[node name="Asteroid4" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 556.255, 840.807 )
-rotation = -2.70177
-
-[node name="Asteroid5" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 708.2, 723.925 )
-rotation = -4.45757
-
-[node name="Asteroid6" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 1118.01, 789.429 )
-rotation = 1.48702
-
-[node name="Asteroid7" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 1268.68, 671.277 )
-rotation = -0.832522
 
 [node name="Players" type="Node" parent="."]
 
 [node name="Player1" parent="Players" instance=ExtResource( 3 )]
+position = Vector2( 783.899, 267.265 )
 
 [node name="Player2" parent="Players" instance=ExtResource( 5 )]
 position = Vector2( 205.581, 397.527 )
+
+[node name="ScreenWrapperAreas" type="Node" parent="."]
+
+[node name="WrapArea" type="Area2D" parent="ScreenWrapperAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenWrapperAreas/WrapArea"]
+position = Vector2( 800, -88 )
+shape = SubResource( 1 )
+
+[node name="PlayArea" type="Area2D" parent="ScreenWrapperAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenWrapperAreas/PlayArea"]
+modulate = Color( 0.792157, 0.792157, 0.792157, 0.141176 )
+position = Vector2( 800, 450 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
