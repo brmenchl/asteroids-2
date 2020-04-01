@@ -3,6 +3,10 @@ extends RigidBody2D
 
 signal health_changed(new_value)
 
+const BULLET = preload("res://scenes/players/bullets/Bullet.tscn")
+const EMITTABLE_DMG_FX = preload("res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn")
+const COWBOY = preload("res://scenes/cowboy/Cowboy.tscn")
+
 export (int) var engine_thrust = 800
 export (int) var spin_thrust = 5000
 export (int) var max_speed = 280
@@ -12,9 +16,6 @@ export (float) var fire_rate = 0.3
 var fire_rate_timer: Timer = null
 onready var texture = ($Sprite as Sprite).texture
 
-const bullet = preload("res://scenes/players/bullets/Bullet.tscn")
-const emittable_damage_fx = preload("res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn")
-const cowboy = preload("res://scenes/cowboy/Cowboy.tscn")
 
 func _get_configuration_warning() -> String:
 	if $ScreenWrappable == null:
@@ -67,27 +68,35 @@ func fire_thrusters(fire_thruster_map):
 func shoot():
 	if fire_rate_timer.is_stopped():
 		fire_rate_timer.start()
-		var b = bullet.instance()
+		var b = BULLET.instance()
 		$BulletContainer.add_child(b)
 		b.start_at(rotation, $BulletSpawnPoint.global_position)
 
 
+func secondary():
+	eject_cowboy()
+
+
 func die():
-	var c = cowboy.instance()
+	eject_cowboy()
+	queue_free()
+
+
+func eject_cowboy():
+	var c = COWBOY.instance()
 	get_parent().add_child(c)
 	var pawn = $Pawn
 	remove_child(pawn)
 	c.add_child(pawn)
 	c.global_position = self.global_position
 	c.eject()
-	queue_free()
+
 
 func hit_by_bullet(position, rotation, damage: int):
-
 	health = clamp(health - damage, 0, 100)
 	emit_signal('health_changed', health)
 
-	var fx = emittable_damage_fx.instance()
+	var fx = EMITTABLE_DMG_FX.instance()
 	fx.position = position
 	fx.rotation = rotation
 	get_parent().add_child(fx)

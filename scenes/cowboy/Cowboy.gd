@@ -8,6 +8,7 @@ export var shots_per_second := 3
 export var eject_force := 300
 var is_ejected := false
 
+
 func _ready():
 	randomize()
 	visible = false
@@ -29,15 +30,14 @@ func shoot():
 		$AnimatedSprite.stop()
 		$AnimatedSprite.animation = "idle"
 
-func secondary():
-	eject()
-	
+
 func eject(direction = rand_range(0, 2 * PI)):
 	if ! is_ejected:
 		var eject_impulse = Vector2(eject_force, 0).rotated(direction)
 		apply_central_impulse(eject_impulse)
 		visible = true
 		is_ejected = true
+
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
