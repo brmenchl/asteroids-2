@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Asteroid",
+"language": "GDScript",
+"path": "res://scenes/asteroids/Asteroid.gd"
+}, {
 "base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://scenes/players/ships/Ship.gd"
 } ]
 _global_script_class_icons={
+"Asteroid": "",
 "Bullet": "",
 "Controller": "",
 "Cowboy": "",
