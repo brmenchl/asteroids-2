@@ -59,13 +59,16 @@ func reset_lasso():
 	is_reeling = false
 	reel_target = null
 
+
 func reset_if_not_reeling():
 	if ! is_reeling:
 		reset_lasso()
 
+
 func start_reeling(body):
 	is_reeling = true
 	reel_target = body
+
 
 func eject(direction = rand_range(0, 2 * PI)):
 	if ! is_ejected:
@@ -80,7 +83,7 @@ func eject(direction = rand_range(0, 2 * PI)):
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 	if is_reeling:
-		var direction = ( reel_target.position - position ).normalized()
+		var direction = (reel_target.position - position).normalized()
 		state.set_linear_velocity(Vector2(reel_force, 0).rotated(direction.angle()))
 	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
 	state.set_transform(transformation)

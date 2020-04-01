@@ -1,7 +1,7 @@
 extends Area2D
 
 signal started_reeling(body)
-signal broke_connection()
+signal broke_connection
 
 export var speed = 750
 var vel = Vector2()
