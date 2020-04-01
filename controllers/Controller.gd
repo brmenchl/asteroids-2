@@ -3,7 +3,6 @@ extends Node
 
 var target: Node = null setget set_target
 
-
 func _process(_delta):
 	if target != null:
 		if target.has_method("shoot"):
