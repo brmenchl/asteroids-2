@@ -14,7 +14,7 @@ onready var texture = ($Sprite as Sprite).texture
 
 const bullet = preload("res://scenes/players/bullets/Bullet.tscn")
 const emittable_damage_fx = preload("res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn")
-
+const cowboy = preload("res://scenes/cowboy/Cowboy.tscn")
 
 func _get_configuration_warning() -> String:
 	if $ScreenWrappable == null:
@@ -72,8 +72,18 @@ func shoot():
 		b.start_at(rotation, $BulletSpawnPoint.global_position)
 
 
+func die():
+	var c = cowboy.instance()
+	get_parent().add_child(c)
+	var pawn = $Pawn
+	remove_child(pawn)
+	c.add_child(pawn)
+	c.global_position = self.global_position
+	c.eject()
+	queue_free()
+
 func hit_by_bullet(position, rotation, damage: int):
-	print("hit")
+
 	health = clamp(health - damage, 0, 100)
 	emit_signal('health_changed', health)
 
@@ -83,4 +93,4 @@ func hit_by_bullet(position, rotation, damage: int):
 	get_parent().add_child(fx)
 
 	if health == 0:
-		queue_free()
+		die()

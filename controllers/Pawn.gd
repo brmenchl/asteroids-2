@@ -18,5 +18,4 @@ func _notification(p_what: int) -> void:
 		# This ensures that the "target" exists even if a node hierarchy is built
 		# outside of the SceneTree
 		NOTIFICATION_PARENTED:
-			if not controller.target:
-				controller.target = get_parent()
+			controller.target = get_parent()

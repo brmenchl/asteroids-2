@@ -29,9 +29,12 @@ func shoot():
 		$AnimatedSprite.stop()
 		$AnimatedSprite.animation = "idle"
 
-func secondary(): # eject
+func secondary():
+	eject()
+	
+func eject(direction = rand_range(0, 2 * PI)):
 	if ! is_ejected:
-		var eject_impulse = Vector2(eject_force, 0).rotated(rand_range(0, 2 * PI))
+		var eject_impulse = Vector2(eject_force, 0).rotated(direction)
 		apply_central_impulse(eject_impulse)
 		visible = true
 		is_ejected = true
