@@ -2,6 +2,7 @@ class_name Ship
 extends RigidBody2D
 
 signal health_changed(new_value)
+signal cowboy_ejected()
 
 const BULLET = preload("res://scenes/players/bullets/Bullet.tscn")
 const EMITTABLE_DMG_FX = preload("res://scenes/players/ships/vfx/hitEffects/HullDamage.tscn")
@@ -13,6 +14,7 @@ export (int) var max_speed = 280
 export (int) var health = 100
 export (float) var fire_rate = 0.3
 
+var is_controlled := false
 var fire_rate_timer: Timer = null
 onready var texture = ($Sprite as Sprite).texture
 
@@ -30,6 +32,8 @@ func _ready():
 	fire_rate_timer.wait_time = fire_rate
 	add_child(fire_rate_timer)
 
+func is_occupied():
+	return get_node_or_null('Pawn') != null
 
 func move(directions):
 	var rotation_dir := -int(directions.left) + int(directions.right)
@@ -90,6 +94,7 @@ func eject_cowboy():
 	c.add_child(pawn)
 	c.global_position = self.global_position
 	c.eject()
+	emit_signal("cowboy_ejected")
 
 
 func hit_by_bullet(position, rotation, damage: int):

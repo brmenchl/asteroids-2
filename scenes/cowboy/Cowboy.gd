@@ -8,12 +8,14 @@ export var max_speed := 280
 export var bullet_force := 500
 export var shots_per_second := 3
 export var eject_force := 300
+export var reel_force := 500
 var control_enabled := false
 var is_ejected := false
 var eject_timer = Timer.new()
 var lasso_extended := false
 var lasso = null
 var is_reeling := false
+var reel_target = null
 
 
 func _ready():
@@ -30,7 +32,7 @@ func move(directions):
 
 
 func shoot():
-	if ! $AnimatedSprite.is_playing():
+	if ! $AnimatedSprite.is_playing() and ! is_reeling:
 		var shot_impulse = -Vector2(bullet_force, 0).rotated(rotation)
 		apply_central_impulse(shot_impulse)
 		$AnimatedSprite.animation = "shoot"
@@ -46,13 +48,24 @@ func secondary():
 		get_parent().add_child(lasso)
 		lasso.start_at(rotation, global_position)
 		lasso_extended = true
-		lasso.connect("tree_exited", self, "reset_lasso")
+		lasso.connect("broke_connection", self, "reset_lasso")
+		lasso.connect("tree_exited", self, "reset_if_not_reeling")
+		lasso.connect("started_reeling", self, "start_reeling")
 
 
 func reset_lasso():
 	lasso = null
 	lasso_extended = false
+	is_reeling = false
+	reel_target = null
 
+func reset_if_not_reeling():
+	if ! is_reeling:
+		reset_lasso()
+
+func start_reeling(body):
+	is_reeling = true
+	reel_target = body
 
 func eject(direction = rand_range(0, 2 * PI)):
 	if ! is_ejected:
@@ -66,5 +79,22 @@ func eject(direction = rand_range(0, 2 * PI)):
 
 
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
+	if is_reeling:
+		var direction = ( reel_target.position - position ).normalized()
+		state.set_linear_velocity(Vector2(reel_force, 0).rotated(direction.angle()))
 	var transformation = $ScreenWrappable.screen_wrapped_transformation(state.get_transform())
 	state.set_transform(transformation)
+
+
+func _on_Cowboy_body_entered(body) -> void:
+	if is_reeling:
+		reset_lasso()
+		if body.is_in_group("ship"):
+			if body.is_occupied():
+				print("EJJECT")
+				body.call_deferred('eject_cowboy')
+				yield(body, "cowboy_ejected")
+			var pawn = $Pawn
+			remove_child(pawn)
+			body.add_child(pawn)
+			queue_free()

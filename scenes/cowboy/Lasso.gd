@@ -1,5 +1,8 @@
 extends Area2D
 
+signal started_reeling(body)
+signal broke_connection()
+
 export var speed = 750
 var vel = Vector2()
 
@@ -16,8 +19,9 @@ func _physics_process(delta):
 
 func _on_LassoTip_body_entered(body: Node) -> void:
 	if body.is_in_group("ship"):
-		print("REEL IN")
+		emit_signal("started_reeling", body)
 	elif body is Asteroid:
+		emit_signal("broke_connection")
 		queue_free()
 
 
