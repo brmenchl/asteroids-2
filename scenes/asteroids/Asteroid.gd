@@ -10,13 +10,16 @@ var ghost_promoted: bool
 var ghost_wrap_direction
 var ghost
 
-enum WRAP_DIRECTION {
+enum GHOST_SPAWN_EDGE {
 	TOP,
 	LEFT,
 	RIGHT,
-	BOTTOM,
-	HORIZONTAL,
-	VERTICAL
+	BOTTOM
+}
+
+enum WRAP_ORIENTATION {
+    VERTICAL,
+    HORIZONTAL
 }
 
 func _ready():
@@ -37,27 +40,27 @@ func wrap_direction_from_transform(transform):
 	var horizontal_middle_of_screen = screensize.x / 2
 	var vertical_middle_of_screen = screensize.y / 2
 	match ghost_wrap_direction:
-		WRAP_DIRECTION.VERTICAL:
+		WRAP_ORIENTATION.VERTICAL:
 			if transform.origin.y >= vertical_middle_of_screen:
-				return WRAP_DIRECTION.TOP
+				return GHOST_SPAWN_EDGE.TOP
 			elif transform.origin.y < vertical_middle_of_screen:
-				return WRAP_DIRECTION.BOTTOM
-		WRAP_DIRECTION.HORIZONTAL:
+				return GHOST_SPAWN_EDGE.BOTTOM
+		WRAP_ORIENTATION.HORIZONTAL:
 			if transform.origin.x >= horizontal_middle_of_screen:
-				return WRAP_DIRECTION.RIGHT
+				return GHOST_SPAWN_EDGE.RIGHT
 			elif transform.origin.x < horizontal_middle_of_screen:
-				return WRAP_DIRECTION.LEFT		
+				return GHOST_SPAWN_EDGE.LEFT
 
 func ghost_transform_from_parent(parent_transform):
 	var ghost_transform = parent_transform
 	match wrap_direction_from_transform(parent_transform):
-		WRAP_DIRECTION.TOP:
+		GHOST_SPAWN_EDGE.TOP:
 			ghost_transform.origin.y = parent_transform.origin.y - screensize.y
-		WRAP_DIRECTION.BOTTOM:
+		GHOST_SPAWN_EDGE.BOTTOM:
 			ghost_transform.origin.y = parent_transform.origin.y + screensize.y
-		WRAP_DIRECTION.LEFT:
+		GHOST_SPAWN_EDGE.LEFT:
 			ghost_transform.origin.x = parent_transform.origin.x + screensize.x
-		WRAP_DIRECTION.RIGHT:
+		GHOST_SPAWN_EDGE.RIGHT:
 			ghost_transform.origin.x = parent_transform.origin.x - screensize.x
 	return ghost_transform 
 	
@@ -81,12 +84,12 @@ func spawn_ghost(wrap_orientation):
 
 func _on_VerticalWrapArea_body_entered(body):
 	if body.is_in_group("asteroid") && !body.is_ghost && !body.ghost:
-		body.call_deferred("spawn_ghost", WRAP_DIRECTION.VERTICAL)
+		body.call_deferred("spawn_ghost", WRAP_ORIENTATION.VERTICAL)
 
 
 func _on_HorizontalWrapArea_body_entered(body):
 	if body.is_in_group("asteroid") && !body.is_ghost && !body.ghost:
-		body.call_deferred("spawn_ghost", WRAP_DIRECTION.HORIZONTAL)
+		body.call_deferred("spawn_ghost", WRAP_ORIENTATION.HORIZONTAL)
 
 
 func promote_ghost():
@@ -99,7 +102,6 @@ func promote_ghost():
 
 
 func _on_PlayArea_body_exited(body):
-	# promote ghost to be a sibling
 	if body.is_in_group("asteroid") && !body.is_ghost:
 		body.call_deferred("promote_ghost")
 		body.queue_free()
