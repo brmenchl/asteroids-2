@@ -86,13 +86,13 @@ func spawn_ghost(wrap_orientation):
 	
 
 func _on_VerticalWrapArea_body_entered(body):
-	if body.is_in_group("asteroid") && !body.is_ghost && body.ghost == null:
-		body.call_deferred("spawn_ghost", WRAP_ORIENTATION.VERTICAL)
+	if body.is_in_group("asteroid") && !body.is_ghost && !body.ghost:
+		body.spawn_ghost(WRAP_ORIENTATION.VERTICAL)
 
 
 func _on_HorizontalWrapArea_body_entered(body):
-	if body.is_in_group("asteroid") && !body.is_ghost && body.ghost == null:
-		body.call_deferred("spawn_ghost", WRAP_ORIENTATION.HORIZONTAL)
+	if body.is_in_group("asteroid") && !body.is_ghost && !body.ghost:
+		body.spawn_ghost(WRAP_ORIENTATION.HORIZONTAL)
 
 
 func promote_ghost():

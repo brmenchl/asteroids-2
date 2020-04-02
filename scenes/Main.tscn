@@ -33,8 +33,12 @@ texture = ExtResource( 6 )
 [node name="AsteroidGroup" type="Node" parent="."]
 
 [node name="Asteroid" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 779.543, 133.478 )
+position = Vector2( 786.336, 110.836 )
 rotation = 1.08036
+
+[node name="Asteroid2" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 505.575, 282.915 )
+rotation = 2.50323
 
 [node name="Players" type="Node" parent="."]
 
