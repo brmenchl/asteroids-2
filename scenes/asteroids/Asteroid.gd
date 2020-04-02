@@ -18,8 +18,8 @@ enum GHOST_SPAWN_EDGE {
 }
 
 enum WRAP_ORIENTATION {
-    VERTICAL,
-    HORIZONTAL
+	VERTICAL,
+	HORIZONTAL
 }
 
 func _ready():
@@ -35,6 +35,8 @@ func hit_by_bullet(position, rotation, _damage):
 	hit_fx.rotation = rotation
 	self.get_parent().add_child(hit_fx)
 
+func set_emit_dust(emittion_state):
+	$dust.emitting = emittion_state
 
 func wrap_direction_from_transform(transform):
 	var horizontal_middle_of_screen = screensize.x / 2
@@ -78,17 +80,18 @@ func spawn_ghost(wrap_orientation):
 	ghost.is_ghost = true
 	ghost.position = position + screensize + screensize # spawns off screen for 1 frame before physics take over
 	ghost.ghost_wrap_direction = wrap_orientation
+	ghost.set_emit_dust(true)
 	decoupler_node.add_child(ghost)
 	add_child(decoupler_node)
 	
 
 func _on_VerticalWrapArea_body_entered(body):
-	if body.is_in_group("asteroid") && !body.is_ghost && !body.ghost:
+	if body.is_in_group("asteroid") && !body.is_ghost && body.ghost == null:
 		body.call_deferred("spawn_ghost", WRAP_ORIENTATION.VERTICAL)
 
 
 func _on_HorizontalWrapArea_body_entered(body):
-	if body.is_in_group("asteroid") && !body.is_ghost && !body.ghost:
+	if body.is_in_group("asteroid") && !body.is_ghost && body.ghost == null:
 		body.call_deferred("spawn_ghost", WRAP_ORIENTATION.HORIZONTAL)
 
 
@@ -97,6 +100,7 @@ func promote_ghost():
 		var parent = get_parent()
 		decoupler_node.remove_child(ghost)
 		ghost.is_ghost = false
+		ghost.set_emit_dust(false)
 		parent.add_child(ghost)
 		ghost_promoted = true
 
