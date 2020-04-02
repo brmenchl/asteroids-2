@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=2]
@@ -9,6 +9,12 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 800, 88 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 800, 88 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 112, 448 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 800, 449.952 )
@@ -27,24 +33,38 @@ texture = ExtResource( 6 )
 [node name="AsteroidGroup" type="Node" parent="."]
 
 [node name="Asteroid" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 781.354, 142.536 )
+position = Vector2( 779.543, 133.478 )
 rotation = 1.08036
 
 [node name="Players" type="Node" parent="."]
 
 [node name="Player1" parent="Players" instance=ExtResource( 3 )]
-position = Vector2( 783.899, 267.265 )
+position = Vector2( 783.899, 315.207 )
 
 [node name="Player2" parent="Players" instance=ExtResource( 5 )]
 position = Vector2( 205.581, 397.527 )
 
 [node name="ScreenWrapperAreas" type="Node" parent="."]
 
-[node name="WrapArea" type="Area2D" parent="ScreenWrapperAreas"]
+[node name="VerticalWrapArea" type="Area2D" parent="ScreenWrapperAreas"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenWrapperAreas/WrapArea"]
+[node name="top" type="CollisionShape2D" parent="ScreenWrapperAreas/VerticalWrapArea"]
 position = Vector2( 800, -88 )
 shape = SubResource( 1 )
+
+[node name="bot" type="CollisionShape2D" parent="ScreenWrapperAreas/VerticalWrapArea"]
+position = Vector2( 800, 988 )
+shape = SubResource( 3 )
+
+[node name="HorizontalWrapArea" type="Area2D" parent="ScreenWrapperAreas"]
+
+[node name="left" type="CollisionShape2D" parent="ScreenWrapperAreas/HorizontalWrapArea"]
+position = Vector2( -112, 448 )
+shape = SubResource( 4 )
+
+[node name="right" type="CollisionShape2D" parent="ScreenWrapperAreas/HorizontalWrapArea"]
+position = Vector2( 1712, 448 )
+shape = SubResource( 4 )
 
 [node name="PlayArea" type="Area2D" parent="ScreenWrapperAreas"]
 
