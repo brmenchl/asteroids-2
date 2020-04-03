@@ -10,10 +10,10 @@ gravity_scale = 0.0
 script = ExtResource( 2 )
 hit_effect = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="AsteroidSprite" type="Sprite" parent="."]
 scale = Vector2( 0.458343, 0.458343 )
 texture = ExtResource( 1 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="AsteroidCollision" type="CollisionPolygon2D" parent="."]
 scale = Vector2( 0.458343, 0.458343 )
 polygon = PoolVector2Array( 49.0439, -190.924, 93.5357, -175.245, 153, -129.4, 153, -126.6, 175.74, -97.7026, 181, -81, 197.35, -5.75292, 196, 30, 185.485, 74.3323, 170.231, 101.451, 141.8, 145, 139.9, 145, 108.79, 169.248, 87.6035, 179.418, 50.3151, 195.52, -34.9, 197, -93, 184.1, -164, 123.4, -197, 51.1, -197, 26, -195.8, -45, -184.9, -79, -164.1, -112, -103.2, -171, -55.1, -194, -9, -196.7, 26.1, -197 )
