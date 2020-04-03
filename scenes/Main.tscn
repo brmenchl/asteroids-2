@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/HUD.tscn" type="PackedScene" id=2]
@@ -6,15 +6,6 @@
 [ext_resource path="res://scenes/asteroids/Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/players/ships/Player2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/mainAssets/background.jpg" type="Texture" id=6]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 800, 88 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 800, 88 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 112, 448 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 800, 449.952 )
@@ -45,26 +36,6 @@ position = Vector2( 205.581, 397.527 )
 
 [node name="ScreenWrapperAreas" type="Node" parent="."]
 
-[node name="VerticalWrapArea" type="Area2D" parent="ScreenWrapperAreas"]
-
-[node name="top" type="CollisionShape2D" parent="ScreenWrapperAreas/VerticalWrapArea"]
-position = Vector2( 800, -88 )
-shape = SubResource( 1 )
-
-[node name="bot" type="CollisionShape2D" parent="ScreenWrapperAreas/VerticalWrapArea"]
-position = Vector2( 800, 988 )
-shape = SubResource( 2 )
-
-[node name="HorizontalWrapArea" type="Area2D" parent="ScreenWrapperAreas"]
-
-[node name="left" type="CollisionShape2D" parent="ScreenWrapperAreas/HorizontalWrapArea"]
-position = Vector2( -112, 448 )
-shape = SubResource( 3 )
-
-[node name="right" type="CollisionShape2D" parent="ScreenWrapperAreas/HorizontalWrapArea"]
-position = Vector2( 1712, 448 )
-shape = SubResource( 3 )
-
 [node name="PlayArea" type="Area2D" parent="ScreenWrapperAreas"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenWrapperAreas/PlayArea"]
@@ -75,3 +46,4 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
+[connection signal="body_exited" from="ScreenWrapperAreas/PlayArea" to="AsteroidGroup/Asteroid" method="_on_PlayArea_body_exited"]
