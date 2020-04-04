@@ -1,4 +1,4 @@
-class_name Asteroid	
+class_name Asteroid
 extends Node2D
 
 export (PackedScene) var hit_effect
@@ -23,9 +23,10 @@ func _ready():
 	# 0 |     1    | 2
 	# 7 | playarea | 3
 	# 6 |     5    | 4
-	
+	$Asteroid.add_to_group("asteroid")
+	connect("swap_visible_asteroid", self, "_on_swap_visible_asteroid", [], CONNECT_ONESHOT)
 	screenwrap_clone_offsets = {
-		0: Vector2(-1 * screensize.x, -1 * screensize.y),
+		0: Vector2(-1 * screensize.x, -1 * screensize.y), # 0
 		1: Vector2(0, -1 * screensize.y), # 1
 		2: Vector2(screensize.x, -1 * screensize.y), # 2
 		3: Vector2(screensize.x, 0), # 3
@@ -34,6 +35,10 @@ func _ready():
 		6: Vector2(-1 * screensize.x, screensize.y), # 6
 		7: Vector2(-1 * screensize.x, 0), # 7
 	}
+	
+	var rand_rotation = randi()%360
+	$Asteroid/AsteroidSprite.rotation = rand_rotation
+	$Asteroid/AsteroidCollision.rotation = rand_rotation
 	
 	for section_id in range(screenwrap_clone_offsets.size()):
 		var clone = new_instance(screenwrap_clone_offsets[section_id])
@@ -75,6 +80,7 @@ func clone_section_id_from_position(position: Vector2):
 	return 6
 	
 func _on_swap_visible_asteroid():
+	print("yes!!")
 	var ex_visible_asteroids_new_section_id = clone_section_id_from_position(visible_asteroid_position())
 	# get this number's asteroid stuffs
 	# visible asteroid's stuffs is now assigned to this number

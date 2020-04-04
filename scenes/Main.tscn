@@ -24,7 +24,25 @@ texture = ExtResource( 6 )
 [node name="AsteroidGroup" type="Node" parent="."]
 
 [node name="Asteroid" parent="AsteroidGroup" instance=ExtResource( 4 )]
-position = Vector2( 531.832, 181.763 )
+position = Vector2( 516.419, 142.374 )
+
+[node name="Asteroid2" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 699.438, 220.176 )
+
+[node name="Asteroid3" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 240.466, 739.088 )
+
+[node name="Asteroid4" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 1303.98, 781.902 )
+
+[node name="Asteroid5" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 1415.3, 596.944 )
+
+[node name="Asteroid6" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 396.311, 610.644 )
+
+[node name="Asteroid7" parent="AsteroidGroup" instance=ExtResource( 4 )]
+position = Vector2( 1345.08, 197.913 )
 
 [node name="Players" type="Node" parent="."]
 
