@@ -16,7 +16,7 @@ jobs:
         projectPath:
           - asteroid.best
         unityVersion:
-          - 2019.2.11f1
+          - 2019.3.7f1
         targetPlatform:
           - WebGL # WebGL.
     steps:
