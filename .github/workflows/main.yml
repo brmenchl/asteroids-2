@@ -34,18 +34,18 @@ jobs:
             Library-${{ matrix.projectPath }}-
             Library-
 
-      # Test
-      - uses: webbertakken/unity-test-runner@v1.6
-        id: testRunner
-        with:
-          projectPath: ${{ matrix.projectPath }}
-          unityVersion: ${{ matrix.unityVersion }}
+      # # Test
+      # - uses: webbertakken/unity-test-runner@v1.6
+      #   id: testRunner
+      #   with:
+      #     projectPath: ${{ matrix.projectPath }}
+      #     unityVersion: ${{ matrix.unityVersion }}
       
-      # Upload Test results
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Test results (all modes)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
+      # # Upload Test results
+      # - uses: actions/upload-artifact@v1
+      #   with:
+      #     name: Test results (all modes)
+      #     path: ${{ steps.testRunner.outputs.artifactsPath }}
 
       # Build
       - name: Build project
