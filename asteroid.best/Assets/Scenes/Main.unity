@@ -425,6 +425,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipRigidBody: {fileID: 1552217811}
+  bullet: {fileID: 2531515449204198714, guid: 3050bc5e7006841d3ba27b6174d77bfb, type: 3}
   afterburnerPower: 35000
   cruisePower: 22000
   torque: 30
+  bulletVelocity: 600
