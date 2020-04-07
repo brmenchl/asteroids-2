@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class ShipControls : MonoBehaviour
 {
-    public Rigidbody2D shipRigidBody;
-    public float thrustPower;
-    public float torque;
+    public Rigidbody shipRigidBody;
+    public float afterburnerPower = 35000;
+    public float cruisePower = 22000;
+    public float torque = 29;
     
     private float _thrustInput;
     private float _torqueInput;
@@ -23,13 +24,13 @@ public class ShipControls : MonoBehaviour
     {
         _thrustInput = Input.GetAxis("Vertical");
         _torqueInput = Input.GetAxis("Horizontal");
-        
     }
 
     private void FixedUpdate()
     {
         // frame independent update for physics
-        shipRigidBody.AddRelativeForce(Vector2.up * (_thrustInput * thrustPower));
-        shipRigidBody.AddTorque(_torqueInput * torque * -1);
+        shipRigidBody.AddRelativeTorque(Vector3.up * (_torqueInput * torque));
+        shipRigidBody.AddRelativeForce(Vector3.forward * (_thrustInput * cruisePower));
     }
+    
 }
