@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShipControls : MonoBehaviour
 {
-    public Rigidbody shipRigidBody;
     public Rigidbody bullet;
     public float afterburnerPower = 35000;
     public float cruisePower = 22000;
     public float torque = 30;
     public float bulletVelocity = 600;
-    
+
     private float _thrustInput;
     private float _torqueInput;
-    
-    // Start is called before the first frame update
+    private Rigidbody shipRigidBody;
+
     void Start()
     {
-        
+        shipRigidBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _thrustInput = Input.GetAxis("Vertical");
@@ -29,13 +24,11 @@ public class ShipControls : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             FireBullet();
-            print("supsupsup");
         }
     }
 
     private void FixedUpdate()
     {
-        // frame independent update for physics
         shipRigidBody.AddRelativeTorque(Vector3.up * (_torqueInput * torque));
         shipRigidBody.AddRelativeForce(Vector3.forward * (_thrustInput * cruisePower));
     }
