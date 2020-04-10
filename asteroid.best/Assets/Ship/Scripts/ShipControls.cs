@@ -7,6 +7,7 @@ public class ShipControls : MonoBehaviour
     public float cruisePower = 22000;
     public float torque = 30;
     public float bulletVelocity = 600;
+    public Transform muzzle;
 
     private float _thrustInput;
     private float _torqueInput;
@@ -35,8 +36,7 @@ public class ShipControls : MonoBehaviour
 
     void FireBullet()
     {
-        var myTransform = transform;
-        Rigidbody bulletInstance = Instantiate(this.bullet, myTransform.position, myTransform.rotation);
-        bulletInstance.velocity = transform.forward * bulletVelocity;
+        Rigidbody bulletInstance = Instantiate(this.bullet, muzzle.position, muzzle.rotation);
+        bulletInstance.velocity = muzzle.forward * bulletVelocity;
     }
 }
