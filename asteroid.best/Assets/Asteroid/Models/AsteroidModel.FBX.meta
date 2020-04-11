@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: bfdb02d993d9b4415808f5ac83febe02
+guid: bec2934b914a443a9b8badd1ca360fbf
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: prop_asteroid_01_mat
-    second: {fileID: 2100000, guid: bad225751da1941d883b284764abe954, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
