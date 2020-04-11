@@ -3,7 +3,6 @@ using Zenject;
 
 public class ShipControls : MonoBehaviour
 {
-    public Rigidbody bullet;
     public float afterburnerPower = 35000;
     public float cruisePower = 22000;
     public float torque = 30;
@@ -14,6 +13,9 @@ public class ShipControls : MonoBehaviour
 
     [Inject]
     readonly InputHandler.InputState _inputState;
+
+    [Inject]
+    readonly Bullet.Factory _bulletFactory;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class ShipControls : MonoBehaviour
 
     void FireBullet()
     {
-        Rigidbody bulletInstance = Instantiate(this.bullet, muzzle.position, muzzle.rotation);
-        bulletInstance.velocity = muzzle.forward * bulletVelocity;
+        var velocity = muzzle.forward * bulletVelocity;
+        _bulletFactory.Create(muzzle.position, muzzle.rotation, velocity);
     }
 }
