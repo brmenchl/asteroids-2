@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class ShipControls : MonoBehaviour
 {
@@ -9,29 +10,24 @@ public class ShipControls : MonoBehaviour
     public float bulletVelocity = 600;
     public Transform muzzle;
 
-    private float _thrustInput;
-    private float _torqueInput;
     private Rigidbody shipRigidBody;
+
+    [Inject]
+    readonly InputHandler.InputState _inputState;
 
     void Start()
     {
         shipRigidBody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        _thrustInput = Input.GetAxis("Vertical");
-        _torqueInput = Input.GetAxis("Horizontal");
-        if (Input.GetButtonDown("Fire1"))
+        shipRigidBody.AddRelativeTorque(Vector3.up * (_inputState.horizontal * torque));
+        shipRigidBody.AddRelativeForce(Vector3.forward * (_inputState.vertical * cruisePower));
+        if (_inputState.isFiring)
         {
             FireBullet();
         }
-    }
-
-    private void FixedUpdate()
-    {
-        shipRigidBody.AddRelativeTorque(Vector3.up * (_torqueInput * torque));
-        shipRigidBody.AddRelativeForce(Vector3.forward * (_thrustInput * cruisePower));
     }
 
     void FireBullet()
