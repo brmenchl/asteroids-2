@@ -10,12 +10,13 @@ public class GameInstaller : MonoInstaller
 
         // Bullet
         Container.BindFactory<Vector3, Quaternion, Bullet, Bullet.Factory>()
-            .FromMonoPoolableMemoryPool(x =>
+            .FromPoolableMemoryPool<Vector3, Quaternion, Bullet, Bullet.Pool>(x =>
                 x.FromComponentInNewPrefab(BulletPrefab)
                 .WithGameObjectName("Bullet")
                 .UnderTransformGroup("Bullets")
             );
 
     }
+
 }
 

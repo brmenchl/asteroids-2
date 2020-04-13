@@ -45,6 +45,10 @@ public class Bullet : MonoBehaviour, IPoolable<Vector3, Quaternion, IMemoryPool>
 
     public class Factory : PlaceholderFactory<Vector3, Quaternion, Bullet> { }
 
+    public class Pool : MonoPoolableMemoryPool<Vector3, Quaternion, IMemoryPool, Bullet>
+    {
+    }
+
     [Serializable]
     public class Settings
     {
