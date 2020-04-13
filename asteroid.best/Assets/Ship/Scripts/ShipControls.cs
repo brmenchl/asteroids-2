@@ -23,11 +23,11 @@ public class ShipControls : MonoBehaviour
         shipRigidBody = GetComponent<Rigidbody>();
     }
 
-    public void Tick()
+    public void Update()
     {
-        if (_playerModel.Health <= 0 && !_playerModel.IsDead)
+        if (_playerModel.Health <= 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
