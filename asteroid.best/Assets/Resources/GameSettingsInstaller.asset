@@ -21,3 +21,4 @@ MonoBehaviour:
     CruisePower: 22000
     Torque: 30000
     MuzzleDistance: 35
+    FireRate: 5

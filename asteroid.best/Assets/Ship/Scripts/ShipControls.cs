@@ -5,6 +5,7 @@ using Zenject;
 public class ShipControls : MonoBehaviour
 {
     private Rigidbody shipRigidBody;
+    private float _lastFireTime;
 
     [Inject]
     readonly Settings _settings;
@@ -35,8 +36,9 @@ public class ShipControls : MonoBehaviour
     {
         shipRigidBody.AddRelativeTorque(Vector3.up * (_inputState.horizontal * _settings.Torque));
         shipRigidBody.AddRelativeForce(Vector3.forward * (_inputState.vertical * _settings.CruisePower));
-        if (_inputState.isFiring)
+        if (_inputState.isFiring && Time.realtimeSinceStartup - _lastFireTime > (1 / _settings.FireRate))
         {
+            _lastFireTime = Time.realtimeSinceStartup;
             FireBullet();
         }
     }
@@ -58,5 +60,6 @@ public class ShipControls : MonoBehaviour
         public float CruisePower;
         public float Torque;
         public float MuzzleDistance;
+        public float FireRate;
     }
 }
