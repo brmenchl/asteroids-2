@@ -6,13 +6,10 @@ public class GameInstaller : MonoInstaller
     public GameObject BulletPrefab;
     public override void InstallBindings()
     {
-        // Player
-        Container.BindInterfacesTo<InputHandler>().AsSingle();
-        Container.Bind<InputHandler.InputState>().AsSingle();
-        Container.Bind<PlayerModel>().AsSingle();
+        SignalBusInstaller.Install(Container);
 
         // Bullet
-        Container.BindFactory<Transform, float, Bullet, Bullet.Factory>()
+        Container.BindFactory<Vector3, Quaternion, Bullet, Bullet.Factory>()
             .FromMonoPoolableMemoryPool(x =>
                 x.FromComponentInNewPrefab(BulletPrefab)
                 .WithGameObjectName("Bullet")

@@ -4,17 +4,22 @@ using Zenject;
 public class InputHandler : ITickable
 {
     readonly InputState _inputState;
+    readonly SignalBus _signalBus;
 
-    public InputHandler(InputState inputState)
+    public InputHandler(InputState inputState, SignalBus signalBus)
     {
         _inputState = inputState;
+        _signalBus = signalBus;
     }
 
     public void Tick()
     {
         _inputState.vertical = Input.GetAxis("Vertical");
         _inputState.horizontal = Input.GetAxis("Horizontal");
-        _inputState.isFiring = Input.GetButton("Fire1");
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _signalBus.Fire<ShootSignal>();
+        }
     }
 
     public class InputState

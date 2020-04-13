@@ -4,25 +4,14 @@ using Zenject;
 
 public class ShipControls : MonoBehaviour
 {
-    private Rigidbody shipRigidBody;
-    private float _lastFireTime;
+    [Inject]
+    Settings _settings;
 
     [Inject]
-    readonly Settings _settings;
+    InputHandler.InputState _inputState;
 
     [Inject]
-    readonly InputHandler.InputState _inputState;
-
-    [Inject]
-    readonly Bullet.Factory _bulletFactory;
-
-    [Inject]
-    readonly PlayerModel _playerModel;
-
-    private void Start()
-    {
-        shipRigidBody = GetComponent<Rigidbody>();
-    }
+    Player _playerModel;
 
     public void Update()
     {
@@ -34,23 +23,13 @@ public class ShipControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        shipRigidBody.AddRelativeTorque(Vector3.up * (_inputState.horizontal * _settings.Torque));
-        shipRigidBody.AddRelativeForce(Vector3.forward * (_inputState.vertical * _settings.CruisePower));
-        if (_inputState.isFiring && Time.realtimeSinceStartup - _lastFireTime > (1 / _settings.FireRate))
-        {
-            _lastFireTime = Time.realtimeSinceStartup;
-            FireBullet();
-        }
+        _playerModel.AddTorque(Vector3.up * (_inputState.horizontal * _settings.Torque));
+        _playerModel.AddForce(Vector3.forward * (_inputState.vertical * _settings.CruisePower));
     }
 
     public void TakeDamage(float damage)
     {
         _playerModel.TakeDamage(damage);
-    }
-
-    void FireBullet()
-    {
-        _bulletFactory.Create(transform, _settings.MuzzleDistance);
     }
 
     [Serializable]
@@ -59,7 +38,5 @@ public class ShipControls : MonoBehaviour
         public float AfterburnerPower;
         public float CruisePower;
         public float Torque;
-        public float MuzzleDistance;
-        public float FireRate;
     }
 }

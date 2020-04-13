@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class Bullet : MonoBehaviour, IPoolable<Transform, float, IMemoryPool>
+public class Bullet : MonoBehaviour, IPoolable<Vector3, Quaternion, IMemoryPool>
 {
     IMemoryPool _pool;
     float _startTime;
@@ -16,10 +16,10 @@ public class Bullet : MonoBehaviour, IPoolable<Transform, float, IMemoryPool>
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
-    public void OnSpawned(Transform trans, float spawnOffset, IMemoryPool pool)
+    public void OnSpawned(Vector3 position, Quaternion rotation, IMemoryPool pool)
     {
         _pool = pool;
-        transform.SetPositionAndRotation(trans.position + (trans.forward * spawnOffset), trans.rotation);
+        transform.SetPositionAndRotation(position, rotation);
         GetComponent<Rigidbody>().velocity = transform.forward * _settings.Speed;
         _startTime = Time.realtimeSinceStartup;
     }
@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour, IPoolable<Transform, float, IMemoryPool>
         }
     }
 
-    public class Factory : PlaceholderFactory<Transform, float, Bullet> { }
+    public class Factory : PlaceholderFactory<Vector3, Quaternion, Bullet> { }
 
     [Serializable]
     public class Settings
