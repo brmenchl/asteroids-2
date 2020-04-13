@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc8017dcce3b4d1faeca6ea2353e26a, type: 3}
   m_Name: GameSettingsInstaller
   m_EditorClassIdentifier: 
+  Bullet:
+    Speed: 1000
+    LifeTime: 1
+    Damage: 10
   Ship:
-    afterburnerPower: 35000
-    cruisePower: 22000
-    torque: 30
-    bulletVelocity: 600
+    AfterburnerPower: 35000
+    CruisePower: 22000
+    Torque: 30000
+    MuzzleDistance: 35

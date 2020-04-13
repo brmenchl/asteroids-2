@@ -367,7 +367,7 @@ Transform:
   m_Children:
   - {fileID: 682013969}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682013967
 GameObject:
@@ -600,66 +600,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50.000004, y: -132.033, z: 0}
---- !u!1 &1023098633
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1023098634}
-  m_Layer: 0
-  m_Name: Muzzle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1023098634
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023098633}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1552217815}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1422021696
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1422021697}
-  m_Layer: 0
-  m_Name: Test Kill Ship
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1422021697
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1422021696}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -175.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552217810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: b4acb8dcd7feb4452976749a9de92e52,
@@ -694,11 +634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c155e1d80a99d4dd495ee07c6c25cd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  afterburnerPower: 35000
-  cruisePower: 22000
-  torque: 90000
-  bulletVelocity: 600
-  muzzle: {fileID: 1422021697}
 --- !u!65 &1552217813
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -712,12 +647,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 39.41716, y: 21.037724, z: 52.34481}
   m_Center: {x: 0.0000019073486, y: 0, z: 3.5502977}
---- !u!4 &1552217815 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: b4acb8dcd7feb4452976749a9de92e52,
-    type: 3}
-  m_PrefabInstance: {fileID: 775734843}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2064763947
 GameObject:
   m_ObjectHideFlags: 0

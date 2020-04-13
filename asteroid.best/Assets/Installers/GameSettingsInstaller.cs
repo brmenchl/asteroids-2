@@ -4,7 +4,12 @@ using Zenject;
 [CreateAssetMenu(fileName = "GameSettingsInstaller", menuName = "Installers/GameSettingsInstaller")]
 public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
 {
+    public Bullet.Settings Bullet;
+    public ShipControls.Settings Ship;
+
     public override void InstallBindings()
     {
+        Container.BindInstance(Bullet).IfNotBound();
+        Container.BindInstance(Ship).IfNotBound();
     }
 }

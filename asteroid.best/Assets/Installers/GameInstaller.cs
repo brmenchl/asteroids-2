@@ -9,13 +9,16 @@ public class GameInstaller : MonoInstaller
         // Player
         Container.BindInterfacesTo<InputHandler>().AsSingle();
         Container.Bind<InputHandler.InputState>().AsSingle();
+        Container.Bind<PlayerModel>().AsSingle();
 
         // Bullet
-        Container.BindFactory<Vector3, Quaternion, Vector3, Bullet, Bullet.Factory>()
+        Container.BindFactory<Transform, float, Bullet, Bullet.Factory>()
             .FromMonoPoolableMemoryPool(x =>
                 x.FromComponentInNewPrefab(BulletPrefab)
+                .WithGameObjectName("Bullet")
                 .UnderTransformGroup("Bullets")
             );
 
     }
 }
+
