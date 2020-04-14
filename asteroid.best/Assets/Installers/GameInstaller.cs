@@ -4,6 +4,7 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     public GameObject BulletPrefab;
+    public GameObject ShipPrefab;
     public override void InstallBindings()
     {
         SignalBusInstaller.Install(Container);
@@ -16,7 +17,17 @@ public class GameInstaller : MonoInstaller
                 .UnderTransformGroup("Bullets")
             );
 
+        // Player
+        Container.BindFactory<Player, Player.Factory>()
+            .FromSubContainerResolve()
+            .ByNewGameObjectInstaller<PlayerInstaller>()
+            .WithGameObjectName("Player");
+
+        // Ship
+        Container.BindFactory<Ship, Ship.Factory>()
+          .FromComponentInNewPrefab(ShipPrefab);
+
+        // Cowboy
     }
 
 }
-

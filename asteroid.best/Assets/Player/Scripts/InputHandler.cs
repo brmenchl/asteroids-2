@@ -21,13 +21,4 @@ public class InputHandler : ITickable
             _signalBus.Fire<ShootSignal>();
         }
     }
-
-    public class InputState
-    {
-        public float horizontal;
-
-        public float vertical;
-
-        public bool isFiring;
-    }
 }

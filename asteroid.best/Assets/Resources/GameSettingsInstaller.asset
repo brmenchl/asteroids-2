@@ -19,6 +19,6 @@ MonoBehaviour:
   Ship:
     AfterburnerPower: 35000
     CruisePower: 22000
-    Torque: 70000
+    TurnPower: 150000
   Shooting:
-    MuzzleDistance: 35
+    MuzzleDistance: 40

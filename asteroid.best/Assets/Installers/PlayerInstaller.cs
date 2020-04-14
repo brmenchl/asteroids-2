@@ -1,28 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-public class PlayerInstaller : MonoInstaller
+public class PlayerInstaller : Installer<PlayerInstaller>
 {
-
-    [SerializeField]
-    Settings _settings = null;
-
     public override void InstallBindings()
     {
-        Container.BindInterfacesTo<InputHandler>().AsSingle();
-        Container.Bind<InputHandler.InputState>().AsSingle();
-        Container.Bind<Player>().AsSingle().WithArguments(_settings.Rigidbody);
+        Container.Bind<Transform>().FromComponentOnRoot();
+        Container.Bind<Player>().AsSingle();
+        Container.Bind<InputState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<HealthWatcher>().AsSingle();
         Container.Bind<ShootHandler>().AsSingle();
 
         Container.DeclareSignal<ShootSignal>();
         Container.BindSignal<ShootSignal>().ToMethod<ShootHandler>(x => x.Shoot).FromResolve();
 
-    }
-
-    [Serializable]
-    public class Settings
-    {
-        public Rigidbody Rigidbody;
     }
 }

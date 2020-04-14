@@ -5,7 +5,7 @@ using Zenject;
 public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
 {
     public Bullet.Settings Bullet;
-    public ShipControls.Settings Ship;
+    public Ship.Settings Ship;
     public ShootHandler.Settings Shooting;
 
     public override void InstallBindings()

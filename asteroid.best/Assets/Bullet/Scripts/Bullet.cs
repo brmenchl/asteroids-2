@@ -34,20 +34,18 @@ public class Bullet : MonoBehaviour, IPoolable<Vector3, Quaternion, IMemoryPool>
 
     public void OnTriggerEnter(Collider other)
     {
-        var player = other.GetComponent<ShipControls>();
+        var ship = other.GetComponent<Ship>();
 
-        if (player != null)
+        if (ship != null)
         {
-            player.TakeDamage(_settings.Damage);
-            _pool.Despawn(this);
+            ship.TakeDamage(_settings.Damage);
         }
+        _pool.Despawn(this);
     }
 
     public class Factory : PlaceholderFactory<Vector3, Quaternion, Bullet> { }
 
-    public class Pool : MonoPoolableMemoryPool<Vector3, Quaternion, IMemoryPool, Bullet>
-    {
-    }
+    public class Pool : MonoPoolableMemoryPool<Vector3, Quaternion, IMemoryPool, Bullet> { }
 
     [Serializable]
     public class Settings

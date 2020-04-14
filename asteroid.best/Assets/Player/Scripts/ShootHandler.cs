@@ -19,15 +19,19 @@ public class ShootHandler
 
     public void Shoot()
     {
-        _bulletFactory.Create(
-          _player.Transform.position + _player.Transform.forward * _settings.MuzzleDistance,
-          _player.Transform.rotation
-        );
+        if (!_player.IsDead)
+        {
+            var baseTransform = _player.GetTransform();
+            _bulletFactory.Create(
+              baseTransform.position + baseTransform.forward * _settings.MuzzleDistance,
+              baseTransform.rotation
+            );
+        }
     }
 
     [Serializable]
     public class Settings
     {
-        public float MuzzleDistance;
+        public float MuzzleDistance; // MAYBE MOVE TO SHIP
     }
 }
