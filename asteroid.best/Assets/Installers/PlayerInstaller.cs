@@ -8,7 +8,7 @@ public class PlayerInstaller : Installer<PlayerInstaller>
         Container.Bind<Transform>().FromComponentOnRoot();
         Container.Bind<Player>().AsSingle();
         Container.Bind<InputState>().AsSingle();
-        Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle();
+        Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<MoveHandler>().AsSingle();
         Container.BindInterfacesAndSelfTo<HealthWatcher>().AsSingle();
         Container.Bind<ShootHandler>().AsSingle();

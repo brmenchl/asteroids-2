@@ -10,7 +10,7 @@ public class Ship : MonoBehaviour, IControllable
     private Rigidbody _rigidbody;
     public float Health { get; private set; } = 100.0f;
 
-    public void Start()
+    public void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody == null)
