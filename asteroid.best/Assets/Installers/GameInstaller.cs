@@ -5,6 +5,8 @@ public class GameInstaller : MonoInstaller
 {
     public GameObject BulletPrefab;
     public GameObject ShipPrefab;
+    public GameObject PlayerPrefab;
+
     public override void InstallBindings()
     {
         SignalBusInstaller.Install(Container);
@@ -18,10 +20,9 @@ public class GameInstaller : MonoInstaller
             );
 
         // Player
-        Container.BindFactory<Player, Player.Factory>()
+        Container.BindFactory<Vector3, Player, Player.Factory>()
             .FromSubContainerResolve()
-            .ByNewGameObjectInstaller<PlayerInstaller>()
-            .WithGameObjectName("Player");
+            .ByNewPrefabInstaller<PlayerInstaller>(PlayerPrefab);
 
         // Ship
         Container.BindFactory<Ship, Ship.Factory>()

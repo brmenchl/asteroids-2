@@ -7,9 +7,10 @@ public class Player
     private readonly Transform _transform;
     public bool IsDead { get; private set; } = false;
 
-    public Player(Ship.Factory shipFactory, Transform transform)
+    public Player(Ship.Factory shipFactory, Transform transform, Vector3 position)
     {
         _transform = transform;
+        _transform.position = position;
 
         var ship = shipFactory.Create();
         SetControllable(ship);
@@ -19,6 +20,7 @@ public class Player
     {
         _controllable = controllable;
         GetTransform().SetParent(_transform);
+        _controllable.GetTransform().SetPositionAndRotation(_transform.position, _transform.rotation);
     }
 
     public void AddForce(Vector3 force) => _controllable.AddForce(force);
@@ -36,6 +38,6 @@ public class Player
         _controllable = null;
     }
 
-    public class Factory : PlaceholderFactory<Player> { }
+    public class Factory : PlaceholderFactory<Vector3, Player> { }
 
 }

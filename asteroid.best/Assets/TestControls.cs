@@ -9,13 +9,7 @@ public class TestControls : MonoBehaviour
 
     public void Start()
     {
-        _playerFactory.Create();
+        _playerFactory.Create(new Vector3(0, 0, 0));
+        _playerFactory.Create(new Vector3(150, 0, -100));
     }
-    // public void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         _playerFactory.Create();
-    //     }
-    // }
 }
