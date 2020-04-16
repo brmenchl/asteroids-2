@@ -6,6 +6,8 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
 {
     public Bullet.Settings Bullet;
     public Ship.Settings Ship;
+
+    public HealthDisplay.Settings HealthDisplay;
     public ShootHandler.Settings Shooting;
 
     public override void InstallBindings()
@@ -13,5 +15,6 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
         Container.BindInstance(Bullet).IfNotBound();
         Container.BindInstance(Ship).IfNotBound();
         Container.BindInstance(Shooting).IfNotBound();
+        Container.BindInstance(HealthDisplay).IfNotBound();
     }
 }

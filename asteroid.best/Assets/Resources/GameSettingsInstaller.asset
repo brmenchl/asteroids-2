@@ -20,5 +20,7 @@ MonoBehaviour:
     AfterburnerPower: 35000
     CruisePower: 22000
     TurnPower: 150000
+  HealthDisplay:
+    BarZOffset: 37
   Shooting:
     MuzzleDistance: 40

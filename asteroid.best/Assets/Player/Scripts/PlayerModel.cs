@@ -7,28 +7,48 @@ public class Player
     private readonly Transform _transform;
     public bool IsDead { get; private set; } = false;
 
-    public Player(Ship.Factory shipFactory, Transform transform, Vector3 position)
+    public Player(Transform transform, Vector3 position)
     {
         _transform = transform;
         _transform.position = position;
-
-        var ship = shipFactory.Create();
-        SetControllable(ship);
     }
 
     public void SetControllable(IControllable controllable)
     {
         _controllable = controllable;
-        GetTransform().SetParent(_transform);
+        _controllable.GetTransform().SetParent(_transform);
         _controllable.GetTransform().SetPositionAndRotation(_transform.position, _transform.rotation);
     }
 
-    public void AddForce(Vector3 force) => _controllable.AddForce(force);
-    public void AddTorque(Vector3 torque) => _controllable.AddTorque(torque);
-    public Transform GetTransform() => _controllable.GetTransform();
+    public void AddForce(Vector3 force)
+    {
+        if (_controllable != null)
+            _controllable.AddForce(force);
+    }
+    public void AddTorque(Vector3 torque)
+    {
+        if (_controllable != null)
+            _controllable.AddTorque(torque);
+    }
+
+    public Transform GetTransform()
+    {
+        return _controllable.GetTransform();
+    }
+
     public float Health
     {
-        get { return _controllable.Health; }
+        get
+        {
+            if (_controllable != null)
+            {
+                return _controllable.Health;
+            }
+            else
+            {
+                return 0.0f;
+            }
+        }
     }
 
     public void Die()

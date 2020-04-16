@@ -7,10 +7,19 @@ using Zenject;
 public class PlayerFacade : MonoBehaviour
 {
 
+    InputState _inputState;
+    SignalBus _signalBus;
+
+    Player _player;
+
     [Inject]
-    readonly InputState _inputState;
-    [Inject]
-    readonly SignalBus _signalBus;
+    public void Contruct(InputState inputState, SignalBus signalBus, Player player)
+    {
+        _inputState = inputState;
+        _signalBus = signalBus;
+        _player = player;
+        _player.SetControllable(GetComponentInChildren<Ship>());
+    }
 
     void Start()
     {
